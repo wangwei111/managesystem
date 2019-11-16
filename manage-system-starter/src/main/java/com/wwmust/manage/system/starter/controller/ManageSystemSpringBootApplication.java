@@ -8,7 +8,6 @@
  **/
 package com.wwmust.manage.system.starter.controller;
 
-import javafx.application.Application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -21,6 +20,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ManageSystemSpringBootApplication {
         public static void main(String[] args) {
-            SpringApplication.run(Application.class, args);
+            SpringApplication.run(ManageSystemSpringBootApplication.class, args);
         }
     }

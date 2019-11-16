@@ -28,7 +28,7 @@
       <module name="manage-system-facade" target="1.8" />
       <module name="manage-system-model" target="1.8" />
       <module name="manage-system-service" target="1.8" />
-      <module name="manage-system-starter" target="1.7" />
+      <module name="manage-system-starter" target="1.8" />
       <module name="managesystem" target="1.5" />
     </bytecodeTargetLevel>
   </component>

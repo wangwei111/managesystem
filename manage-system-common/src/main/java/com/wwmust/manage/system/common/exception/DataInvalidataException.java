@@ -10,30 +10,29 @@ package com.wwmust.manage.system.common.exception;
 
 /**
  * ${DESCRIPTION}
- * api接口请求异常
- * @author 37079<37079@wwmust.com>
- * @date 11/11/2019 19:59
+ *  数据校验异常
+ * @author wangwei<wwfdqc@126.com>
+ * @date 11/16/2019 15:15
  */
-public class ApiException extends  BaseRuntimeException{
+public class DataInvalidataException  extends  BaseRuntimeException{
+    public DataInvalidataException(){super();}
 
-    public ApiException(){super();}
-
-    public ApiException(String message){
+    public DataInvalidataException(String message){
         super(message);
     }
-    public ApiException(String message,Throwable cause){
+    public DataInvalidataException(String message,Throwable cause){
         super(message,cause);
     }
-    public  ApiException(Throwable casue){
+    public  DataInvalidataException(Throwable casue){
         super(casue);
     }
-    public ApiException(String message,Throwable cause,String errorCode){
+    public DataInvalidataException(String message,Throwable cause,String errorCode){
         super(message,cause,errorCode);
     }
-    public ApiException(String message,String errorCode){
+    public DataInvalidataException(String message,String errorCode){
         super(message,errorCode);
     }
-    public ApiException(Throwable cause,String errorCode){
+    public DataInvalidataException(Throwable cause,String errorCode){
         super(cause,errorCode);
     }
 }

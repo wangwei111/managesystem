@@ -4,7 +4,7 @@ spring:
     application:
         name: manage-system
     profiles:
-        active: test
+        active: dev
 pagehelper:
     helper-dialect: mysql
     params: count=countSql

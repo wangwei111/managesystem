@@ -10,30 +10,30 @@ package com.wwmust.manage.system.common.exception;
 
 /**
  * ${DESCRIPTION}
- * api接口请求异常
- * @author 37079<37079@wwmust.com>
- * @date 11/11/2019 19:59
+ * 业务异常
+ * @author wangwei<wwfdqc@126.com>
+ * @date 11/16/2019 15:17
  */
-public class ApiException extends  BaseRuntimeException{
+public class ServiceException extends  BaseRuntimeException {
 
-    public ApiException(){super();}
+    public ServiceException(){super();}
 
-    public ApiException(String message){
+    public ServiceException(String message){
         super(message);
     }
-    public ApiException(String message,Throwable cause){
+    public ServiceException(String message,Throwable cause){
         super(message,cause);
     }
-    public  ApiException(Throwable casue){
+    public  ServiceException(Throwable casue){
         super(casue);
     }
-    public ApiException(String message,Throwable cause,String errorCode){
+    public ServiceException(String message,Throwable cause,String errorCode){
         super(message,cause,errorCode);
     }
-    public ApiException(String message,String errorCode){
+    public ServiceException(String message,String errorCode){
         super(message,errorCode);
     }
-    public ApiException(Throwable cause,String errorCode){
+    public ServiceException(Throwable cause,String errorCode){
         super(cause,errorCode);
     }
 }

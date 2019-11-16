@@ -11,5 +11,23 @@
 
     <artifactId>manage-system-service</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.wwmust</groupId>
+            <artifactId>manage-system-facade</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wwmust</groupId>
+            <artifactId>manage-system-facade</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wwmust</groupId>
+            <artifactId>manage-system-facade</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 
 </project>

@@ -1,0 +1,13 @@
+server:
+    port: 8301
+spring:
+    application:
+        name: manage-system
+    profiles:
+        active: test
+pagehelper:
+    helper-dialect: mysql
+    params: count=countSql
+    reasonable: true
+    row-bounds-with-count: true
+    support-methods-arguments: true

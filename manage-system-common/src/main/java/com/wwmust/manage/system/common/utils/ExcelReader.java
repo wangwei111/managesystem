@@ -1,3 +1,4 @@
+/*
 package com.wwmust.manage.system.common.utils;
 
 import org.apache.poi.hssf.usermodel.*;
@@ -11,20 +12,24 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+*/
 /**
  * 操作Excel表格的功能类
- */
+ *//*
+
 public class ExcelReader {
     private POIFSFileSystem fs;
     private HSSFWorkbook wb;
     private HSSFSheet sheet;
     private HSSFRow row;
 
-    /**
+    */
+/**
      * 读取Excel表格表头的内容
      * @param InputStream
      * @return String 表头内容的数组
-     */
+     *//*
+
     public String[] readExcelTitle(InputStream is) {
         try {
             fs = new POIFSFileSystem(is);
@@ -45,11 +50,13 @@ public class ExcelReader {
         return title;
     }
 
-    /**
+    */
+/**
      * 读取Excel数据内容
      * @param InputStream
      * @return Map 包含单元格数据内容的Map对象
-     */
+     *//*
+
     public Map<Integer, String> readExcelContent(InputStream is) {
         Map<Integer, String> content = new HashMap<Integer, String>();
         String str = "";
@@ -82,12 +89,14 @@ public class ExcelReader {
         return content;
     }
 
-    /**
+    */
+/**
      * 获取单元格数据内容为字符串类型的数据
      * 
      * @param cell Excel单元格
      * @return String 单元格数据内容
-     */
+     *//*
+
     public static String getStringCellValue(HSSFCell cell) {
         String strCell = "";
         switch (cell.getCellType()) {
@@ -116,13 +125,15 @@ public class ExcelReader {
         return strCell;
     }
 
-    /**
+    */
+/**
      * 获取单元格数据内容为日期类型的数据
      * 
      * @param cell
      *            Excel单元格
      * @return String 单元格数据内容
-     */
+     *//*
+
     private String getDateCellValue(HSSFCell cell) {
         String result = "";
         try {
@@ -144,11 +155,13 @@ public class ExcelReader {
         return result;
     }
 
-    /**
+    */
+/**
      * 根据HSSFCell类型设置数据
      * @param cell
      * @return
-     */
+     *//*
+
     public static String getCellFormatValue(HSSFCell cell) {
         String cellvalue = "";
         DecimalFormat df = new DecimalFormat("0");
@@ -195,7 +208,8 @@ public class ExcelReader {
     }
 
     public static void main(String[] args) {
-        /*try {
+        */
+/*try {
             // 对读取Excel表格标题测试
             InputStream is = new FileInputStream("d:\\test2.xls");
             ExcelReader excelReader = new ExcelReader();
@@ -216,8 +230,9 @@ public class ExcelReader {
         } catch (FileNotFoundException e) {
             System.out.println("未找到指定路径的文件!");
             e.printStackTrace();
-        }*/
+        }*//*
+
     	DecimalFormat df = new DecimalFormat("0");
     	System.out.println(df.format(12.0));
     }
-}
+}*/

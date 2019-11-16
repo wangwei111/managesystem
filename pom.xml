@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.wwmust</groupId>
+    <artifactId>manage-system</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>manage-system-common</module>
+        <module>manage-system-compose</module>
+        <module>manage-system-config</module>
+        <module>manage-system-dao</module>
+        <module>manage-system-service</module>
+        <module>manage-system-facade</module>
+        <module>manage-system-model</module>
+        <module>manage-system-dto</module>
+        <module>manage-system-starter</module>
+    </modules>
+    <name>manage-system</name>
+    <packaging>pom</packaging>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.5.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+
+    <properties>
+        <orika-version>1.4.2</orika-version>
+        <sentinel-version>1.6.3</sentinel-version>
+        <junit4-version>1.7.4</junit4-version>
+    </properties>
+    <dependencies>
+
+        <!-- orika -->
+        <dependency>
+            <groupId>ma.glasnost.orika</groupId>
+            <artifactId>orika-core</artifactId>
+            <version>${orika-version}</version>
+        </dependency>
+
+        <!-- sentinel -->
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-core</artifactId>
+            <version>${sentinel-version}</version>
+        </dependency>
+        <!-- junit4 -->
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>${junit4-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+
+
+
+
+    </dependencies>
+
+
+
+
+</project>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/manage-system.iml" filepath="$PROJECT_DIR$/manage-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage-system-common/manage-system-common.iml" filepath="$PROJECT_DIR$/manage-system-common/manage-system-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage-system-compose/manage-system-compose.iml" filepath="$PROJECT_DIR$/manage-system-compose/manage-system-compose.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage-system-config/manage-system-config.iml" filepath="$PROJECT_DIR$/manage-system-config/manage-system-config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage-system-dao/manage-system-dao.iml" filepath="$PROJECT_DIR$/manage-system-dao/manage-system-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage-system-dto/manage-system-dto.iml" filepath="$PROJECT_DIR$/manage-system-dto/manage-system-dto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage-system-facade/manage-system-facade.iml" filepath="$PROJECT_DIR$/manage-system-facade/manage-system-facade.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage-system-model/manage-system-model.iml" filepath="$PROJECT_DIR$/manage-system-model/manage-system-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage-system-service/manage-system-service.iml" filepath="$PROJECT_DIR$/manage-system-service/manage-system-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manage-system-starter/manage-system-starter.iml" filepath="$PROJECT_DIR$/manage-system-starter/manage-system-starter.iml" />
+    </modules>
+  </component>
+</project>

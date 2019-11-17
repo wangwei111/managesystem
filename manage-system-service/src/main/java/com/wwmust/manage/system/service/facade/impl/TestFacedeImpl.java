@@ -6,7 +6,7 @@
  * Proprietary and Confidential.
  * ****************************************************
  **/
-package com.wwmust.manage.system.facade.impl;
+package com.wwmust.manage.system.service.facade.impl;
 
 import com.wwmust.manage.system.facade.facede.TestFacade;
 

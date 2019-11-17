@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>manage-system-starter</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>manage-system-starter Maven Webapp</name>
     <!-- FIXME change it to the project's website -->
@@ -33,6 +33,21 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wwmust</groupId>
+            <artifactId>manage-system-facade</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wwmust</groupId>
+            <artifactId>manage-system-service</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wwmust</groupId>
+            <artifactId>manage-system-facade</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

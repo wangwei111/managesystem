@@ -18,7 +18,7 @@ import lombok.Data;
  */
 @Data
 public class AdminResp {
-    private  String uid;
+    private  long uid;
     private String username;
     private String password;
     private String state;

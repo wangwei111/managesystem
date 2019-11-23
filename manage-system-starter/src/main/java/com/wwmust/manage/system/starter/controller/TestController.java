@@ -32,9 +32,4 @@ public class TestController {
         return "测试地址！";
     }
 
-    @GetMapping("manage/api/getUser")
-    public String getUser(){
-        AdminResp admin=  userFacade.getUser();
-        return JSON.toJSONString(admin);
-    }
 }

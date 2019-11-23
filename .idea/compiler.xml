@@ -12,6 +12,7 @@
         <module name="manage-system-dao" />
         <module name="manage-system-dto" />
         <module name="manage-system-facade" />
+        <module name="manage-system-generaor" />
         <module name="manage-system-model" />
         <module name="manage-system-service" />
         <module name="manage-system-starter" />
@@ -26,6 +27,7 @@
       <module name="manage-system-dao" target="1.8" />
       <module name="manage-system-dto" target="1.8" />
       <module name="manage-system-facade" target="1.8" />
+      <module name="manage-system-generaor" target="1.8" />
       <module name="manage-system-model" target="1.8" />
       <module name="manage-system-service" target="1.8" />
       <module name="manage-system-starter" target="1.8" />

@@ -8,12 +8,19 @@
  **/
 package com.wwmust.manage.system.starter.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.wwmust.manage.system.config.response.JsonResult;
 import com.wwmust.manage.system.facade.UserFacade;
 import com.wwmust.manage.system.facade.param.LoginUserParam;
+import com.wwmust.manage.system.facade.param.RegisterUserParam;
+import com.wwmust.manage.system.facade.resp.UserInfoResp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * ${DESCRIPTION}
@@ -27,12 +34,51 @@ public class UserController {
     @Autowired
     private UserFacade userFacade;
 
-    public JsonResult userLogin(LoginUserParam loginUserParam){
+    /**
+     * 登录
+     * @param loginUserParam
+     * @return
+     */
+    @PostMapping("/api/system/user/login")
+    public JsonResult userLogin(LoginUserParam loginUserParam,HttpServletResponse response, HttpServletRequest request){
         try{
-            userFacade.userLogin(loginUserParam);
-            return JsonResult.okJsonResultWithMsg("登录成功");
+            UserInfoResp userInfoResp = userFacade.userLogin(loginUserParam);
+            if(userInfoResp !=null){
+                Cookie cookie=new Cookie("token", userInfoResp.getToken());
+                cookie.setMaxAge(30000); //存活期为30分钟
+                response.addCookie(cookie);
+            }
+            return JsonResult.okJsonResultWithData(userInfoResp);
         }catch (Exception e){
             return  JsonResult.failJsonResult(e.getMessage());
         }
     }
+
+
+    @PostMapping("/api/system/user/register")
+    public JsonResult register(@RequestBody  RegisterUserParam registerUserParam, HttpServletResponse response, HttpServletRequest request){
+        try{
+            UserInfoResp userInfoResp = userFacade.register(registerUserParam);
+            return JsonResult.okJsonResultWithData(userInfoResp);
+        }catch (Exception e){
+            return  JsonResult.failJsonResult(e.getMessage());
+        }
+    }
+
+
+    /**
+     * 查询用户信息
+     * @return
+     */
+    @PostMapping("/api/system/user/getUserInfo")
+    public JsonResult getUserInfo(HttpServletResponse response, HttpServletRequest request){
+        try{
+            UserInfoResp userInfoResp = userFacade.getUserInfo(response,request);
+            return JsonResult.okJsonResultWithData(userInfoResp);
+        }catch (Exception e){
+            return  JsonResult.failJsonResult(e.getMessage());
+        }
+    }
+
+
 }

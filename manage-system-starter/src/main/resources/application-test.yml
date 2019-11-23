@@ -5,4 +5,4 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://212.64.79.154:3310/wwmust?setUnicode=true&characterEncoding=utf8
     username: root
-    password: wangWEI2&ming
+    password: WANGwei2ming

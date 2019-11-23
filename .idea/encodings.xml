@@ -8,6 +8,7 @@
     <file url="file://$PROJECT_DIR$/manage-system-dao" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/manage-system-dto" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/manage-system-facade" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage-system-generaor" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/manage-system-model" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/manage-system-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/manage-system-starter" charset="UTF-8" />

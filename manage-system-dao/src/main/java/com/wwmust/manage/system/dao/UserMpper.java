@@ -8,10 +8,9 @@
  **/
 package com.wwmust.manage.system.dao;
 
-import com.wwmust.manage.system.model.Admin;
-import org.apache.ibatis.annotations.Mapper;
+import com.wwmust.manage.system.model.User;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -21,8 +20,7 @@ import org.springframework.stereotype.Repository;
  * @date 11/17/2019 21:12
  */
 @Repository
-@Component
-public interface UserMpper<T>  extends  BaseMapper<Admin>{
-    @Select("SELECT * from admin where username ='admin'")
-    Admin getUser();
+public interface UserMpper<T>  extends  BaseMapper<User>{
+    @Select ("SELECT * FROM user WHERE username =#{username} OR account_number =#{username} OR email =#{username} OR phone_number =#{username}")
+    User chickUserName(@Param("username") String username);
 }

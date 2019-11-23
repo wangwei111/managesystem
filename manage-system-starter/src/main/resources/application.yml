@@ -11,3 +11,10 @@ pagehelper:
     reasonable: true
     row-bounds-with-count: true
     support-methods-arguments: true
+mybatis:
+  type-aliases-package: com.wwmust.manage.system.dao
+
+login:
+    interceptor:
+          register: true
+

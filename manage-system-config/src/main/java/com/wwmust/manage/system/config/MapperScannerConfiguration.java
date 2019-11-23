@@ -8,8 +8,11 @@
  **/
 package com.wwmust.manage.system.config;
 
+import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import tk.mybatis.mapper.common.BaseMapper;
 import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 
 import java.util.Properties;
@@ -21,16 +24,22 @@ import java.util.Properties;
  * @date 11/23/2019 18:58
  */
 @Configuration
+@AutoConfigureAfter(MybatisAutoConfiguration.class)
 public class MapperScannerConfiguration {
-
-    @Bean
-    public MapperScannerConfigurer getMapperScannerConfigurer(){
-        MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
-        Properties properties = new Properties();
-        properties.setProperty("mappers","com.wwmust.manage.system.dao.BaseMapper");
-        mapperScannerConfigurer.setProperties(properties);
-        mapperScannerConfigurer.setBasePackage("com.wwmust.manage.system.dao");
-        mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
-        return mapperScannerConfigurer;
-    }
+        /**
+         * @return
+         */
+        @Bean
+        public MapperScannerConfigurer mapperScannerConfigurer() {
+            MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
+            mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
+            mapperScannerConfigurer.setBasePackage("com.wwmust.manage.system.dao.*");
+            Properties properties = new Properties();
+            properties.setProperty("mappers", BaseMapper.class.getName());
+            properties.setProperty("notEmpty", "false");
+            properties.setProperty("IDENTITY", "MYSQL");
+            properties.setProperty("ORDER", "BEFORE");
+            mapperScannerConfigurer.setProperties(properties);
+            return mapperScannerConfigurer;
+        }
 }

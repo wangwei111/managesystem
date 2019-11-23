@@ -8,6 +8,7 @@
  **/
 package com.wwmust.manage.system.dao;
 
+import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.common.MySqlMapper;
 
 /**
@@ -16,5 +17,5 @@ import tk.mybatis.mapper.common.MySqlMapper;
  * @author wangwei<wwfdqc@126.com>
  * @date 11/17/2019 21:06
  */
-public interface BaseMapper<T> extends tk.mybatis.mapper.common.BaseMapper<T>, MySqlMapper<T>{
+public interface BaseMapper<T> extends tk.mybatis.mapper.common.BaseMapper<T>,Mapper<T>, MySqlMapper<T>{
 }

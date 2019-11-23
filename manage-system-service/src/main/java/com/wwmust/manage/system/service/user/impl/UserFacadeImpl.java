@@ -40,7 +40,6 @@ import java.util.concurrent.TimeUnit;
  * @date 11/17/2019 21:20
  */
 @Service("UserFacade")
-@Component
 public class UserFacadeImpl implements UserFacade {
 
     @Autowired

@@ -5,7 +5,8 @@
  * Unauthorized copy of this file, via any medium is strictly prohibited.
  * Proprietary and Confidential.
  * ****************************************************
- **/
+ **//*
+
 package com.wwmust.manage.system.config;
 
 import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
@@ -17,18 +18,22 @@ import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 
 import java.util.Properties;
 
+*/
 /**
  * ${DESCRIPTION}
  *
  * @author wangwei<wwfdqc@126.com>
  * @date 11/23/2019 18:58
- */
+ *//*
+
 @Configuration
 @AutoConfigureAfter(MybatisAutoConfiguration.class)
 public class MapperScannerConfiguration {
-        /**
+        */
+/**
          * @return
-         */
+         *//*
+
         @Bean
         public MapperScannerConfigurer mapperScannerConfigurer() {
             MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
@@ -43,3 +48,4 @@ public class MapperScannerConfiguration {
             return mapperScannerConfigurer;
         }
 }
+*/

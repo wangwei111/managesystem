@@ -8,6 +8,7 @@
  **/
 package com.wwmust.manage.system.service.user.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.wwmust.manage.system.common.exception.DataInvalidataException;
 import com.wwmust.manage.system.config.SnowflakeWorker;
 import com.wwmust.manage.system.config.redis.RedisKitWithSpringRedisTemplate;
@@ -19,12 +20,16 @@ import com.wwmust.manage.system.facade.resp.AdminResp;
 import com.wwmust.manage.system.facade.resp.UserInfoResp;
 import com.wwmust.manage.system.model.User;
 import com.wwmust.manage.system.service.units.Md5Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
+import sun.rmi.runtime.Log;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,6 +46,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Service("UserFacade")
 public class UserFacadeImpl implements UserFacade {
+    private  static  final Logger log =  LoggerFactory.getLogger(UserFacadeImpl.class.getSimpleName());
 
     @Autowired
     private UserMpper userMpper;
@@ -57,8 +63,8 @@ public class UserFacadeImpl implements UserFacade {
      */
     @Override
     public UserInfoResp userLogin(LoginUserParam loginUserParam) throws Exception {
-        Assert.isNull(loginUserParam.getUsername(),"用户名不能为空！");
-        Assert.isNull(loginUserParam.getPassword(),"密码不能为空！");
+        Assert.isTrue(!StringUtils.isEmpty(loginUserParam.getUsername()),"用户名不能为空！");
+        Assert.isTrue(!StringUtils.isEmpty(loginUserParam.getPassword()),"密码不能为空！");
         User user = userMpper.chickUserName(loginUserParam.getUsername());
         UserInfoResp userInfoResp = new UserInfoResp();
         if(user !=null){
@@ -68,7 +74,7 @@ public class UserFacadeImpl implements UserFacade {
                 String token=user.getUsername()+loginUserParam.getPassword()+System.currentTimeMillis();
                 //存在redis中
                 redisKitWithSpringRedisTemplate.setIfAbsent(Md5Util.EncoderByMd5(token),user,30, TimeUnit.MINUTES);
-                userInfoResp.setToken(token);
+                userInfoResp.setToken(Md5Util.EncoderByMd5(token));
                 BeanUtils.copyProperties(user,userInfoResp);
             }else{
                 throw    new DataInvalidataException("你输入的密码错误,请从新输入！");
@@ -109,9 +115,11 @@ public class UserFacadeImpl implements UserFacade {
             registerUserParam.setUpdateDate(new Date());
             registerUserParam.setAccountNumber(registerUserParam.getUsername());
             BeanUtils.copyProperties(registerUserParam,user);
-            userMpper.insert(user);
+            log.info(JSON.toJSONString(user));
+            userMpper.insertSelective(user);
             BeanUtils.copyProperties(user,userInfoResp);
         }else{
+            log.error("该账号已经被注册！");
             throw   new DataInvalidataException("该账号已经被注册！");
         }
             return userInfoResp;

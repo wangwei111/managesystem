@@ -13,6 +13,9 @@ import com.wwmust.manage.system.facade.UserFacade;
 import com.wwmust.manage.system.facade.param.LoginUserParam;
 import com.wwmust.manage.system.facade.param.RegisterUserParam;
 import com.wwmust.manage.system.facade.resp.UserInfoResp;
+import com.wwmust.manage.system.service.user.impl.UserFacadeImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +34,10 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 public class UserController {
 
+    private  static  final Logger log =  LoggerFactory.getLogger(UserController.class.getSimpleName());
+
+
+
     @Autowired
     private UserFacade userFacade;
 
@@ -40,7 +47,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/api/system/user/login")
-    public JsonResult userLogin(LoginUserParam loginUserParam,HttpServletResponse response, HttpServletRequest request){
+    public JsonResult userLogin(@RequestBody  LoginUserParam loginUserParam,HttpServletResponse response, HttpServletRequest request){
         try{
             UserInfoResp userInfoResp = userFacade.userLogin(loginUserParam);
             if(userInfoResp !=null){
@@ -50,6 +57,7 @@ public class UserController {
             }
             return JsonResult.okJsonResultWithData(userInfoResp);
         }catch (Exception e){
+            log.error("api/system/user/login:error:{}"+e);
             return  JsonResult.failJsonResult(e.getMessage());
         }
     }
@@ -61,6 +69,7 @@ public class UserController {
             UserInfoResp userInfoResp = userFacade.register(registerUserParam);
             return JsonResult.okJsonResultWithData(userInfoResp);
         }catch (Exception e){
+            log.error("api/system/user/register:error:{}"+e);
             return  JsonResult.failJsonResult(e.getMessage());
         }
     }
@@ -76,6 +85,7 @@ public class UserController {
             UserInfoResp userInfoResp = userFacade.getUserInfo(response,request);
             return JsonResult.okJsonResultWithData(userInfoResp);
         }catch (Exception e){
+            log.error("api/system/user/getUserInfo:error：{}"+e);
             return  JsonResult.failJsonResult(e.getMessage());
         }
     }

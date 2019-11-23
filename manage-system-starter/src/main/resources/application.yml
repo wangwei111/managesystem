@@ -17,4 +17,12 @@ mybatis:
 login:
     interceptor:
           register: true
-
+## logging config
+logging:
+  level:
+    ROOT: debug
+    org.springfromework.web: INFO
+    com.wwmust: debug
+    org.hibernate: ERROR
+  pattern:
+    console: '%clr(%d{HH:mm:ss}){yellow} [%clr(%thread){red}] %-5level --- %clr(%logger){green} | %msg%n'

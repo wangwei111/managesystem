@@ -6,9 +6,10 @@ import java.util.Date;
 
 public class User {
     @Id
-    private Integer uid;
+    private Long uid;
 
-    private String anonymity;
+    @Column(name = "nick_name")
+    private String nickName;
 
     private String username;
 
@@ -52,29 +53,29 @@ public class User {
     /**
      * @return uid
      */
-    public Integer getUid() {
+    public Long getUid() {
         return uid;
     }
 
     /**
      * @param uid
      */
-    public void setUid(Integer uid) {
+    public void setUid(Long uid) {
         this.uid = uid;
     }
 
     /**
-     * @return anonymity
+     * @return nick_name
      */
-    public String getAnonymity() {
-        return anonymity;
+    public String getNickName() {
+        return nickName;
     }
 
     /**
-     * @param anonymity
+     * @param nickName
      */
-    public void setAnonymity(String anonymity) {
-        this.anonymity = anonymity == null ? null : anonymity.trim();
+    public void setNickName(String nickName) {
+        this.nickName = nickName == null ? null : nickName.trim();
     }
 
     /**

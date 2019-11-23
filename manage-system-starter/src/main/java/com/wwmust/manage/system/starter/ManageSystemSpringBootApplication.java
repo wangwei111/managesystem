@@ -8,12 +8,12 @@
  **/
 package com.wwmust.manage.system.starter;
 
+import com.wwmust.manage.system.dao.BaseMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
+import tk.mybatis.spring.annotation.MapperScan;
 
 /**
  * ${DESCRIPTION}
@@ -27,7 +27,10 @@ import org.springframework.core.env.Environment;
         "com.wwmust.manage.system.starter",
         "com.wwmust.manage.system.config"
 })
-@MapperScan("com.wwmust.manage.system.dao")
+@MapperScan(  basePackages = {
+        "com.wwmust.manage.system.dao"
+        },
+        markerInterface = BaseMapper.class)
 @Slf4j
 public class ManageSystemSpringBootApplication {
     public static void main(String[] args) {

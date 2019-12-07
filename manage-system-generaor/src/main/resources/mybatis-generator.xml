@@ -35,14 +35,14 @@
         </javaModelGenerator>
 
 
-        <table tableName="bs_article" domainObjectName="BsArticle"
+        <table tableName="article_skin_stype" domainObjectName="ArticleSkinStype"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false" >
         <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
 
-        <table tableName="bs_attention_article" domainObjectName="bsAttentionArticle"
+   <!--     <table tableName="bs_attention_article" domainObjectName="bsAttentionArticle"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false" >
@@ -119,7 +119,7 @@
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false" >
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
+        </table>-->
 
     </context>
 </generatorConfiguration>

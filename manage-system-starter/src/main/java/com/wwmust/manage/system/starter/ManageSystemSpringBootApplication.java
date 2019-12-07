@@ -29,7 +29,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 })
 @MapperScan(  basePackages = {
         "com.wwmust.manage.system.dao"
-        },
+},
         markerInterface = BaseMapper.class)
 @Slf4j
 public class ManageSystemSpringBootApplication {

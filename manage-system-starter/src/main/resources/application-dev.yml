@@ -16,3 +16,5 @@ spring:
         max-active: 200
     port: 6379
     timeout: 1000
+sensitiveword:
+  url: 212.64.79.154:8302

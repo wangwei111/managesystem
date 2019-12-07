@@ -6,3 +6,5 @@ spring:
     url: jdbc:mysql://212.64.79.154:3310/wwmust?setUnicode=true&characterEncoding=utf8
     username: root
     password: WANGwei2ming
+sensitiveword:
+  url: 212.64.79.154:8302

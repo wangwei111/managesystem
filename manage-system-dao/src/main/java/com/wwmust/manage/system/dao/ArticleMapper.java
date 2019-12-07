@@ -8,20 +8,15 @@
  **/
 package com.wwmust.manage.system.dao;
 
-import com.wwmust.manage.system.model.FndCategory;
-import org.apache.ibatis.annotations.Select;
-import org.springframework.context.annotation.ComponentScan;
+import com.wwmust.manage.system.model.article.Article;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 /**
  * ${DESCRIPTION}
  *
  * @author wangwei<wwfdqc@126.com>
- * @date 12/07/2019 14:43
+ * @date 12/07/2019 20:47
  */
 @Repository
-public interface CategoryMapper<T>  extends  BaseMapper<FndCategory> {
-    @Select("select category_code as categoryCode,category_name as categoryName from fnd_category where enable_flag ='Y' order by sort asc")
-    List<FndCategory> getFndCategoryList();
+public interface ArticleMapper<T>  extends  BaseMapper<Article>   {
 }

@@ -41,14 +41,14 @@ public class CategoryFacadeImpl implements CategoryFacade{
     public List<CategoryResp> getFndCategoryList() {
         try{
             List<FndCategory> fndCategories=   categoryMapper.getFndCategoryList();
-            if(!CollectionUtils.isEmpty(fndCategories)){
-                ArrayList<CategoryResp> categoryResps = new ArrayList<>();
+            List<CategoryResp> list = new ArrayList<>();
+            if(fndCategories != null && fndCategories.size()>0){
                 fndCategories.forEach(fndCategory -> {
                     CategoryResp categoryResp = new CategoryResp();
                     BeanUtils.copyProperties(fndCategory,categoryResp);
-                    categoryResps.add(categoryResp);
+                    list.add(categoryResp);
                 });
-                return categoryResps;
+                return list;
             }
         }catch (Exception e){
             log.error("系统异常：{}",e.getMessage());

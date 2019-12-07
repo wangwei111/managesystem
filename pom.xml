@@ -133,6 +133,13 @@
             <version>${commons.lang3.version}</version>
         </dependency>
 
+        <!--fengin-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>2.1.2.RELEASE</version>
+        </dependency>
+
         <!-- orika -->
         <dependency>
             <groupId>ma.glasnost.orika</groupId>

@@ -35,7 +35,7 @@
         </javaModelGenerator>
 
 
-        <table tableName="article_skin_stype" domainObjectName="ArticleSkinStype"
+        <table tableName="sys_user" domainObjectName="SysUser"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false" >

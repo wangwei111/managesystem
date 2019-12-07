@@ -64,6 +64,11 @@
             <artifactId>manage-system-config</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.wwmust</groupId>
+            <artifactId>manage-system-dao</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

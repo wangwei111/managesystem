@@ -11,11 +11,14 @@ package com.wwmust.manage.system.service.article;
 import com.alibaba.fastjson.JSON;
 import com.wwmust.manage.system.common.exception.DataInvalidataException;
 import com.wwmust.manage.system.common.exception.SystemException;
+import com.wwmust.manage.system.config.SnowflakeWorker;
 import com.wwmust.manage.system.config.response.JsonResult;
 import com.wwmust.manage.system.dao.ArticleMapper;
 import com.wwmust.manage.system.dao.ArticleSkinStypeMapper;
 import com.wwmust.manage.system.facade.ArticleFacade;
 import com.wwmust.manage.system.facade.param.article.ArticleParam;
+import com.wwmust.manage.system.facade.param.article.ArticleQueryParam;
+import com.wwmust.manage.system.facade.resp.article.ArticleResp;
 import com.wwmust.manage.system.facade.resp.article.ArticleSkinStypeResp;
 import com.wwmust.manage.system.model.article.Article;
 import com.wwmust.manage.system.model.article.ArticleSkinStype;
@@ -30,10 +33,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * ${DESCRIPTION}
@@ -84,21 +84,38 @@ public class ArticleFacadeImpl implements ArticleFacade {
      */
     @Override
     public Map<String, Long> save(ArticleParam param) {
+        Map<String, Long> map = new HashMap<>();
         if(param ==null){
             new DataInvalidataException("参数为空！");
         }
         Article article = new Article();
         BeanUtils.copyProperties(param,article);
         if(param.getArticleId() != null){
+            map.put("articleId",param.getArticleId());
             article.setUpdateTime(new Date());
             //修改操作
-            articleMapper.updateByPrimaryKeySelective(param);
+            articleMapper.updateByPrimaryKeySelective(article);
         }else {
             //新增操作
             article.setCreateTime(new Date());
             article.setUpdateTime(new Date());
+            Long articleId = SnowflakeWorker.generateId();
+            article.setArticleId(articleId);
+            map.put("articleId",articleId);
             articleMapper.insertSelective(article);
         }
+        return map;
+    }
+
+    /**
+     * 查询文章集合
+     * @param param
+     * @return
+     */
+    @Override
+    public ArticleResp list(ArticleQueryParam param) {
+
+
         return null;
     }
 }

@@ -8,6 +8,8 @@
  **/
 package com.wwmust.manage.system.facade.param.article;
 
+import com.github.pagehelper.Page;
+
 import java.math.BigDecimal;
 
 /**
@@ -16,7 +18,7 @@ import java.math.BigDecimal;
  * @author wangwei<wwfdqc@126.com>
  * @date 12/07/2019 17:34
  */
-public class ArticleParam {
+public class ArticleQueryParam  extends Page{
 
     private Long articleId;
 
@@ -35,7 +37,6 @@ public class ArticleParam {
 
     //暂存和保存 1保存；0暂存
     private String isSave;
-
 
     //默认后台初始化数据
     private String tokenKey;

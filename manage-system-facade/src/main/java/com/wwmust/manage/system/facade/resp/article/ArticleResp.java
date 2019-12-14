@@ -6,7 +6,9 @@
  * Proprietary and Confidential.
  * ****************************************************
  **/
-package com.wwmust.manage.system.facade.param.article;
+package com.wwmust.manage.system.facade.resp.article;
+
+import com.github.pagehelper.Page;
 
 import java.math.BigDecimal;
 
@@ -16,7 +18,7 @@ import java.math.BigDecimal;
  * @author wangwei<wwfdqc@126.com>
  * @date 12/07/2019 17:34
  */
-public class ArticleParam {
+public class ArticleResp{
 
     private Long articleId;
 
@@ -24,9 +26,16 @@ public class ArticleParam {
 
     private Long skinId;
 
+    //创建人id
     private String createUser;
+    //创建人头像
+    private  String createUserImgUrl;
+    //话题id
+    private  Long topicId;
+    //话题名称
+    private String topicName;
 
-    private Long topicId;
+
     //是否公开
     private String isPublic;
 
@@ -37,14 +46,28 @@ public class ArticleParam {
     private String isSave;
 
 
-    //默认后台初始化数据
-    private String tokenKey;
 
    //是否是草稿
     private String isDraft;
 
     //文章标题
     private  String articleTitle;
+
+    public String getCreateUserImgUrl() {
+        return createUserImgUrl;
+    }
+
+    public void setCreateUserImgUrl(String createUserImgUrl) {
+        this.createUserImgUrl = createUserImgUrl;
+    }
+
+    public String getTopicName() {
+        return topicName;
+    }
+
+    public void setTopicName(String topicName) {
+        this.topicName = topicName;
+    }
 
     public String getArticleTitle() {
         return articleTitle;
@@ -134,11 +157,4 @@ public class ArticleParam {
         this.topicId = topicId;
     }
 
-    public String getTokenKey() {
-        return tokenKey;
-    }
-
-    public void setTokenKey(String tokenKey) {
-        this.tokenKey = tokenKey;
-    }
 }

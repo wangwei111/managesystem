@@ -35,7 +35,18 @@
         </javaModelGenerator>
 
 
-        <table tableName="sys_user" domainObjectName="SysUser"
+        <!-- 生成的映射文件包名和位置 -->
+        <sqlMapGenerator targetPackage="com.wwmust.manage.system.mapper" targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+        <!-- 生成DAO的包名和位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.wwmust.manage.system..dao" targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+
+
+        <table tableName="article" domainObjectName="Article"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false" >

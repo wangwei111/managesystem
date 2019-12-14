@@ -40,42 +40,28 @@ public class Article {
     @Column(name = "is_sensitive")
     private Byte isSensitive;
 
+    private BigDecimal longitude;
+
+    private BigDecimal latitude;
+
+    @Column(name = "is_public")
+    private Byte isPublic;
+
+    @Column(name = "is_draft")
+    private Byte isDraft;
+
     @Column(name = "article_content")
     private String articleContent;
 
-    @Column(name = "longitude")
-    private BigDecimal longitude;
-    @Column(name = "latitude")
-    private BigDecimal latitude;
+    @Column(name= "article_title")
+    private String articleTitle;
 
-
-    //是否公开
-    @Column(name = "is_public")
-    private String isPublic;
-
-
-    public BigDecimal getLongitude() {
-        return longitude;
+    public String getArticleTitle() {
+        return articleTitle;
     }
 
-    public String getIsPublic() {
-        return isPublic;
-    }
-
-    public void setIsPublic(String isPublic) {
-        this.isPublic = isPublic;
-    }
-
-    public void setLongitude(BigDecimal longitude) {
-        this.longitude = longitude;
-    }
-
-    public BigDecimal getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(BigDecimal latitude) {
-        this.latitude = latitude;
+    public void setArticleTitle(String articleTitle) {
+        this.articleTitle = articleTitle;
     }
 
     /**
@@ -230,6 +216,62 @@ public class Article {
      */
     public void setIsSensitive(Byte isSensitive) {
         this.isSensitive = isSensitive;
+    }
+
+    /**
+     * @return longitude
+     */
+    public BigDecimal getLongitude() {
+        return longitude;
+    }
+
+    /**
+     * @param longitude
+     */
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
+    }
+
+    /**
+     * @return latitude
+     */
+    public BigDecimal getLatitude() {
+        return latitude;
+    }
+
+    /**
+     * @param latitude
+     */
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
+    }
+
+    /**
+     * @return is_public
+     */
+    public Byte getIsPublic() {
+        return isPublic;
+    }
+
+    /**
+     * @param isPublic
+     */
+    public void setIsPublic(Byte isPublic) {
+        this.isPublic = isPublic;
+    }
+
+    /**
+     * @return is_draft
+     */
+    public Byte getIsDraft() {
+        return isDraft;
+    }
+
+    /**
+     * @param isDraft
+     */
+    public void setIsDraft(Byte isDraft) {
+        this.isDraft = isDraft;
     }
 
     /**

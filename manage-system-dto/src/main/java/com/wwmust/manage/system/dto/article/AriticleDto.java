@@ -6,9 +6,7 @@
  * Proprietary and Confidential.
  * ****************************************************
  **/
-package com.wwmust.manage.system.facade.resp.article;
-
-import com.github.pagehelper.Page;
+package com.wwmust.manage.system.dto.article;
 
 import java.math.BigDecimal;
 
@@ -16,79 +14,36 @@ import java.math.BigDecimal;
  * ${DESCRIPTION}
  *
  * @author wangwei<wwfdqc@126.com>
- * @date 12/07/2019 17:34
+ * @date 12/16/2019 23:06
  */
-public class ArticleResp{
-
+public class AriticleDto {
     private Long articleId;
 
     private Long categoryId;
 
     private Long skinId;
 
-    //创建人id
     private String createUser;
-    //创建人头像
-    private  String createUserImgUrl;
-    //话题id
-    private  Long topicId;
-    //话题名称
-    private String topicName;
 
-
+    private Long topicId;
     //是否公开
     private String isPublic;
 
-    private BigDecimal  longitude;
+    private BigDecimal longitude;
     private BigDecimal latitude;
 
     //暂存和保存 1保存；0暂存
     private String isSave;
 
 
-    //浏览数
-    private Integer pageViewNum;
+    //默认后台初始化数据
+    private String tokenKey;
 
-    //来源
-    private String source;
-
-   //是否是草稿
+    //是否是草稿
     private String isDraft;
 
     //文章标题
     private  String articleTitle;
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    public Integer getPageViewNum() {
-        return pageViewNum;
-    }
-
-    public void setPageViewNum(Integer pageViewNum) {
-        this.pageViewNum = pageViewNum;
-    }
-
-    public String getCreateUserImgUrl() {
-        return createUserImgUrl;
-    }
-
-    public void setCreateUserImgUrl(String createUserImgUrl) {
-        this.createUserImgUrl = createUserImgUrl;
-    }
-
-    public String getTopicName() {
-        return topicName;
-    }
-
-    public void setTopicName(String topicName) {
-        this.topicName = topicName;
-    }
 
     public String getArticleTitle() {
         return articleTitle;
@@ -178,4 +133,11 @@ public class ArticleResp{
         this.topicId = topicId;
     }
 
+    public String getTokenKey() {
+        return tokenKey;
+    }
+
+    public void setTokenKey(String tokenKey) {
+        this.tokenKey = tokenKey;
+    }
 }

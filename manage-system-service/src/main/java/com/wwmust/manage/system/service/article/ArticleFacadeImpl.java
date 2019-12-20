@@ -15,6 +15,7 @@ import com.wwmust.manage.system.config.SnowflakeWorker;
 import com.wwmust.manage.system.config.response.JsonResult;
 import com.wwmust.manage.system.dao.ArticleMapper;
 import com.wwmust.manage.system.dao.ArticleSkinStypeMapper;
+import com.wwmust.manage.system.dto.article.AriticleDto;
 import com.wwmust.manage.system.facade.ArticleFacade;
 import com.wwmust.manage.system.facade.param.article.ArticleParam;
 import com.wwmust.manage.system.facade.param.article.ArticleQueryParam;
@@ -109,13 +110,19 @@ public class ArticleFacadeImpl implements ArticleFacade {
 
     /**
      * 查询文章集合
-     * @param param
      * @return
      */
     @Override
-    public ArticleResp list(ArticleQueryParam param) {
-
-
-        return null;
+    public List<ArticleResp> list() {
+        AriticleDto ariticleDto =new AriticleDto();
+   //     BeanUtils.copyProperties(param,ariticleDto);
+       List<Article> articles=  articleMapper.list(ariticleDto);
+       List<ArticleResp> resps =  new ArrayList<>();
+       articles.forEach(article -> {
+           ArticleResp resp = new ArticleResp();
+           BeanUtils.copyProperties(article,resp);
+           resps.add(resp);
+       });
+        return resps;
     }
 }

@@ -31,7 +31,6 @@ public interface ArticleFacade {
 
     /**
      * 文章保存及修改
-     * @param param
      * @return
      */
     Map<String,Long> save(ArticleParam param);
@@ -41,5 +40,5 @@ public interface ArticleFacade {
      * @param param
      * @return
      */
-    ArticleResp list(ArticleQueryParam param);
+    List<ArticleResp>  list();
 }

@@ -1,5 +1,6 @@
 server:
     port: 8301
+    max-http-header-size: 8192
 spring:
     application:
         name: manage-system
@@ -13,6 +14,8 @@ pagehelper:
     support-methods-arguments: true
 mybatis:
   type-aliases-package: com.wwmust.manage.system.dao
+  mapper-locations: classpath*:mapper/*.xml
+
 
 login:
     interceptor:

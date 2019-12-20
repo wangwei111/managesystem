@@ -10,7 +10,9 @@ package com.wwmust.manage.system.starter.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.wwmust.manage.system.config.response.JsonResult;
+import com.wwmust.manage.system.facade.ArticleFacade;
 import com.wwmust.manage.system.facade.CategoryFacade;
+import com.wwmust.manage.system.facade.resp.article.ArticleResp;
 import com.wwmust.manage.system.facade.resp.category.CategoryResp;
 import com.wwmust.manage.system.model.FndCategory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ public class CategoryController {
     @Autowired
     private CategoryFacade categoryFacade;
 
+    @Autowired
+    private ArticleFacade articleFacade;
+
     /**
      * 获取类型
      * @return
@@ -39,5 +44,11 @@ public class CategoryController {
     public JsonResult< List<CategoryResp> > getFndCategory(){
         List<CategoryResp>  list = categoryFacade.getFndCategoryList();
         return JsonResult.okJsonResultWithData( list);
+    }
+
+    @GetMapping("api/article/list1")
+    public JsonResult<List<ArticleResp> > list( ){
+        List<ArticleResp>  articleResp = articleFacade.list();
+        return JsonResult.okJsonResultWithData( articleResp);
     }
 }

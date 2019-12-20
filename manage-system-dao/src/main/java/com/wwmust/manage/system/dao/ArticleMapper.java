@@ -8,8 +8,12 @@
  **/
 package com.wwmust.manage.system.dao;
 
+import com.wwmust.manage.system.dto.article.AriticleDto;
 import com.wwmust.manage.system.model.article.Article;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * ${DESCRIPTION}
@@ -19,4 +23,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ArticleMapper<T>  extends  BaseMapper<Article>   {
+
+    List<Article> list(@Param("ariticleDto") AriticleDto ariticleDto);
 }

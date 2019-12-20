@@ -56,6 +56,30 @@ public class Article {
     @Column(name= "article_title")
     private String articleTitle;
 
+    //浏览数
+    @Column(name= "page_view_num")
+    private Integer pageViewNum;
+
+    //来源
+    @Column(name= "source")
+    private String source;
+
+    public Integer getPageViewNum() {
+        return pageViewNum;
+    }
+
+    public void setPageViewNum(Integer pageViewNum) {
+        this.pageViewNum = pageViewNum;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
     public String getArticleTitle() {
         return articleTitle;
     }

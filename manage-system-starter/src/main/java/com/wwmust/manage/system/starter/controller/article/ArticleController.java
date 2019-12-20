@@ -56,11 +56,11 @@ public class ArticleController {
     }
 
     /**
-     * 暂存及保存
+     *查询列表
      */
-    @PostMapping("api/article/list")
-    public JsonResult<ArticleResp> save(ArticleQueryParam param, HttpServletRequest request, HttpServletResponse response){
-        ArticleResp articleResp = articleFacade.list(param);
+    @GetMapping("api/article/list")
+    public JsonResult<List<ArticleResp> > list(  /*ArticleQueryParam param, HttpServletRequest request, HttpServletResponse response*/){
+        List<ArticleResp>  articleResp = articleFacade.list();
         return JsonResult.okJsonResultWithData( articleResp);
     }
 

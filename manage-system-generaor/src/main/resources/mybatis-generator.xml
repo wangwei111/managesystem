@@ -6,7 +6,8 @@
 
     <!--&lt;!&ndash; 引入外部文件 &ndash;&gt;-->
     <!--&lt;!&ndash; mysql 驱动 &ndash;&gt;-->
-    <classPathEntry location="E:\资料\项目\实体工具\generator\mysql-connector-java-5.1.6-bin.jar"/>
+
+    <classPathEntry location="d:\soft\mysql-connector-java-5.1.46-bin.jar"/>
 
     <context id="my" targetRuntime="MyBatis3">
 
@@ -46,11 +47,17 @@
 
 
 
-        <table tableName="article" domainObjectName="Article"
+        <table tableName="sys_star" domainObjectName="SysStar"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false" >
         <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="article_detail" domainObjectName="ArticleDWetail"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" >
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
 
    <!--     <table tableName="bs_attention_article" domainObjectName="bsAttentionArticle"

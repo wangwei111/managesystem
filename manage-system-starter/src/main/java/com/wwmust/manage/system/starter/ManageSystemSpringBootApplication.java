@@ -8,12 +8,12 @@
  **/
 package com.wwmust.manage.system.starter;
 
-import com.wwmust.manage.system.dao.BaseMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.core.env.Environment;
+import tk.mybatis.mapper.common.BaseMapper;
 import tk.mybatis.spring.annotation.MapperScan;
 
 /**
@@ -30,8 +30,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 })
 @MapperScan(  basePackages = {
         "com.wwmust.manage.system.dao"
-},
-        markerInterface = BaseMapper.class)
+})
 @Slf4j
 @EnableFeignClients(basePackages ={"com.wwmust.manage.system.service.fengin"})
 public class ManageSystemSpringBootApplication {

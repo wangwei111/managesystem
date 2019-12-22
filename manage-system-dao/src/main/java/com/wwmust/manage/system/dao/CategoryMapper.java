@@ -10,8 +10,8 @@ package com.wwmust.manage.system.dao;
 
 import com.wwmust.manage.system.model.FndCategory;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Repository;
+import tk.mybatis.mapper.common.BaseMapper;
 
 import java.util.List;
 /**
@@ -21,7 +21,7 @@ import java.util.List;
  * @date 12/07/2019 14:43
  */
 @Repository
-public interface CategoryMapper<T>  extends  BaseMapper<FndCategory> {
+public interface CategoryMapper<T>  extends BaseMapper<FndCategory> {
     @Select("select category_code as categoryCode,category_name as categoryName from fnd_category where enable_flag ='Y' order by sort asc")
     List<FndCategory> getFndCategoryList();
 }

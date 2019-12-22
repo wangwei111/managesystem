@@ -15,12 +15,8 @@ import com.wwmust.manage.system.facade.param.article.ArticleQueryParam;
 import com.wwmust.manage.system.facade.resp.article.ArticleResp;
 import com.wwmust.manage.system.facade.resp.article.ArticleSkinStypeResp;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +46,7 @@ public class ArticleController {
      * 暂存及保存
      */
     @PostMapping("api/article/save")
-    public JsonResult<Map<String,Long>> save(ArticleParam param, HttpServletRequest request, HttpServletResponse response){
+    public JsonResult<Map<String,Long>> save(ArticleParam param){
         Map<String,Long> articleId  = articleFacade.save(param);
         return JsonResult.okJsonResultWithData( articleId);
     }
@@ -58,9 +54,9 @@ public class ArticleController {
     /**
      *查询列表
      */
-    @GetMapping("api/article/list")
-    public JsonResult<List<ArticleResp> > list(  /*ArticleQueryParam param, HttpServletRequest request, HttpServletResponse response*/){
-        List<ArticleResp>  articleResp = articleFacade.list();
+    @PostMapping("api/article/list")
+    public JsonResult<List<ArticleResp> > list(@RequestBody ArticleQueryParam param){
+        List<ArticleResp>  articleResp = articleFacade.list(param);
         return JsonResult.okJsonResultWithData( articleResp);
     }
 

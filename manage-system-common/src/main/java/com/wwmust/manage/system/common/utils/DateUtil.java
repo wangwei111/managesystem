@@ -602,7 +602,22 @@ public class DateUtil {
 	    cal2.setTime(d2);
 	    return cal1.compareTo(cal2);
     }
-    
+    public  static  String getTimeDifference(Date start,Date end){
+		float hourOfBettwenTwoDate = getHourOfBettwenTwoDate(start, end);
+		if(hourOfBettwenTwoDate >=24){
+			int daysOfBettwenTwoDate = getDaysOfBettwenTwoDate(start, end);
+			if(daysOfBettwenTwoDate >= 30){
+				return  daysOfBettwenTwoDate+"天前";
+			}else {
+				int i = month() - getMonthByDate(start);
+				return i+"月前";
+			}
+		}else {
+			return hourOfBettwenTwoDate+"小时前";
+		}
+	}
+
+
     /**
      * 获取得两个日期间相差几天
      * @param d1

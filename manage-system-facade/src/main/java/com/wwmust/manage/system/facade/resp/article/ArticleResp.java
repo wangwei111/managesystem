@@ -8,8 +8,6 @@
  **/
 package com.wwmust.manage.system.facade.resp.article;
 
-import com.github.pagehelper.Page;
-
 import java.math.BigDecimal;
 
 /**
@@ -45,9 +43,39 @@ public class ArticleResp{
     //暂存和保存 1保存；0暂存
     private String isSave;
 
+    //时间
+    private  String time;
 
-    //浏览数
-    private Integer pageViewNum;
+    private String userId;
+    private String userName;
+    private String userImgUrl;
+
+
+
+
+
+    /**
+     * 赞同数
+     */
+    private Integer approvalNum;
+
+    private Integer opposeNum;
+
+    /**
+     * 收藏数
+     */
+    private Integer collectNum;
+
+    /**
+     * 浏览数
+     */
+    private Integer viewNum;
+
+    /**
+     * 关注数
+     */
+    private Integer attentionNum;
+
 
     //来源
     private String source;
@@ -58,6 +86,79 @@ public class ArticleResp{
     //文章标题
     private  String articleTitle;
 
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserImgUrl() {
+        return userImgUrl;
+    }
+
+    public void setUserImgUrl(String userImgUrl) {
+        this.userImgUrl = userImgUrl;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public Integer getApprovalNum() {
+        return approvalNum;
+    }
+
+    public void setApprovalNum(Integer approvalNum) {
+        this.approvalNum = approvalNum;
+    }
+
+    public Integer getOpposeNum() {
+        return opposeNum;
+    }
+
+    public void setOpposeNum(Integer opposeNum) {
+        this.opposeNum = opposeNum;
+    }
+
+    public Integer getCollectNum() {
+        return collectNum;
+    }
+
+    public void setCollectNum(Integer collectNum) {
+        this.collectNum = collectNum;
+    }
+
+    public Integer getViewNum() {
+        return viewNum;
+    }
+
+    public void setViewNum(Integer viewNum) {
+        this.viewNum = viewNum;
+    }
+
+    public Integer getAttentionNum() {
+        return attentionNum;
+    }
+
+    public void setAttentionNum(Integer attentionNum) {
+        this.attentionNum = attentionNum;
+    }
+
     public String getSource() {
         return source;
     }
@@ -66,13 +167,6 @@ public class ArticleResp{
         this.source = source;
     }
 
-    public Integer getPageViewNum() {
-        return pageViewNum;
-    }
-
-    public void setPageViewNum(Integer pageViewNum) {
-        this.pageViewNum = pageViewNum;
-    }
 
     public String getCreateUserImgUrl() {
         return createUserImgUrl;

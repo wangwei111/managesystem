@@ -40,6 +40,7 @@ public class CategoryFacadeImpl implements CategoryFacade{
     @Override
     public List<CategoryResp> getFndCategoryList() {
         try{
+
             List<FndCategory> fndCategories=   categoryMapper.getFndCategoryList();
             List<CategoryResp> list = new ArrayList<>();
             if(fndCategories != null && fndCategories.size()>0){

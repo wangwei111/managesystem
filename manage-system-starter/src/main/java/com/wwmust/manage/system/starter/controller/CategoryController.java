@@ -45,10 +45,4 @@ public class CategoryController {
         List<CategoryResp>  list = categoryFacade.getFndCategoryList();
         return JsonResult.okJsonResultWithData( list);
     }
-
-    @GetMapping("api/article/list1")
-    public JsonResult<List<ArticleResp> > list( ){
-        List<ArticleResp>  articleResp = articleFacade.list();
-        return JsonResult.okJsonResultWithData( articleResp);
-    }
 }

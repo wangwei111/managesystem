@@ -8,11 +8,11 @@
  **/
 package com.wwmust.manage.system.dao;
 
-import com.wwmust.manage.system.model.FndCategory;
 import com.wwmust.manage.system.model.article.ArticleSkinStype;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
+import tk.mybatis.mapper.common.BaseMapper;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ import java.util.List;
  * @date 12/07/2019 15:24
  */
 @Repository
-public interface ArticleSkinStypeMapper<T>  extends  BaseMapper<ArticleSkinStype>  {
+public interface ArticleSkinStypeMapper<T>  extends BaseMapper<ArticleSkinStype> {
     @Select("<script>" +
             "select " +
             "   article_skin_id," +

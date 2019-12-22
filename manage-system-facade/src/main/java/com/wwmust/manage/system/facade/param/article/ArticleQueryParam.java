@@ -18,25 +18,19 @@ import java.math.BigDecimal;
  * @author wangwei<wwfdqc@126.com>
  * @date 12/07/2019 17:34
  */
-public class ArticleQueryParam  extends Page{
+public class ArticleQueryParam {
 
-    private Long articleId;
-
+    private int pageNum;
+    private int pageSize;
     private Long categoryId;
 
     private Long skinId;
 
-    private String createUser;
 
     private Long topicId;
-    //是否公开
-    private String isPublic;
 
     private BigDecimal  longitude;
     private BigDecimal latitude;
-
-    //暂存和保存 1保存；0暂存
-    private String isSave;
 
     //默认后台初始化数据
     private String tokenKey;
@@ -44,8 +38,11 @@ public class ArticleQueryParam  extends Page{
    //是否是草稿
     private String isDraft;
 
+
     //文章标题
     private  String articleTitle;
+
+
 
     public String getArticleTitle() {
         return articleTitle;
@@ -63,20 +60,21 @@ public class ArticleQueryParam  extends Page{
         this.isDraft = isDraft;
     }
 
-    public String getIsSave() {
-        return isSave;
+
+    public int getPageNum() {
+        return pageNum;
     }
 
-    public void setIsSave(String isSave) {
-        this.isSave = isSave;
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
     }
 
-    public String getIsPublic() {
-        return isPublic;
+    public int getPageSize() {
+        return pageSize;
     }
 
-    public void setIsPublic(String isPublic) {
-        this.isPublic = isPublic;
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 
     public BigDecimal getLongitude() {
@@ -95,14 +93,6 @@ public class ArticleQueryParam  extends Page{
         this.latitude = latitude;
     }
 
-    public Long getArticleId() {
-        return articleId;
-    }
-
-    public void setArticleId(Long articleId) {
-        this.articleId = articleId;
-    }
-
     public Long getCategoryId() {
         return categoryId;
     }
@@ -119,13 +109,6 @@ public class ArticleQueryParam  extends Page{
         this.skinId = skinId;
     }
 
-    public String getCreateUser() {
-        return createUser;
-    }
-
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser;
-    }
 
     public Long getTopicId() {
         return topicId;

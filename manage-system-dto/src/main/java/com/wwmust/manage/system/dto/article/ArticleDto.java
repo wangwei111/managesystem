@@ -16,12 +16,13 @@ import java.math.BigDecimal;
  * @author wangwei<wwfdqc@126.com>
  * @date 12/16/2019 23:06
  */
-public class AriticleDto {
+public class ArticleDto {
     private Long articleId;
 
     private Long categoryId;
 
     private Long skinId;
+
 
     private String createUser;
 
@@ -35,6 +36,9 @@ public class AriticleDto {
     //暂存和保存 1保存；0暂存
     private String isSave;
 
+    //最热
+    private  String isHot;
+
 
     //默认后台初始化数据
     private String tokenKey;
@@ -42,8 +46,28 @@ public class AriticleDto {
     //是否是草稿
     private String isDraft;
 
+
+    //最新
+    private String isNew;
+
     //文章标题
     private  String articleTitle;
+
+    public String getIsNew() {
+        return isNew;
+    }
+
+    public void setIsNew(String isNew) {
+        this.isNew = isNew;
+    }
+
+    public String getIsHot() {
+        return isHot;
+    }
+
+    public void setIsHot(String isHot) {
+        this.isHot = isHot;
+    }
 
     public String getArticleTitle() {
         return articleTitle;
@@ -124,6 +148,8 @@ public class AriticleDto {
     public void setCreateUser(String createUser) {
         this.createUser = createUser;
     }
+
+
 
     public Long getTopicId() {
         return topicId;

@@ -40,5 +40,5 @@ public interface ArticleFacade {
      * @param param
      * @return
      */
-    List<ArticleResp>  list();
+    List<ArticleResp>  list(ArticleQueryParam param);
 }

@@ -1,15 +1,23 @@
 package com.wwmust.manage.system.dao;
 
 import com.wwmust.manage.system.model.SysImage;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
-import tk.mybatis.mapper.common.BaseMapper;
 
 import java.util.List;
 
 @Repository
-public interface SysImageMapper extends BaseMapper<SysImage> {
+public interface SysImageMapper {
+    int deleteByPrimaryKey(Long sysImgId);
 
-    @Select("select * from sys_image")
+    int insert(SysImage record);
+
+    int insertSelective(SysImage record);
+
+    SysImage selectByPrimaryKey(Long sysImgId);
+
+    int updateByPrimaryKeySelective(SysImage record);
+
+    int updateByPrimaryKey(SysImage record);
+
     List<SysImage> getImageList();
 }

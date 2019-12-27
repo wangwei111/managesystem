@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wwmust.manage.system.dao.ArticleSkinStypeMapper">
+    <resultMap id="BaseResultMap" type="com.wwmust.manage.system.model.ArticleSkinStype">
+        <id column="article_skin_id" property="articleSkinId" jdbcType="BIGINT"/>
+        <result column="templete_img" property="templeteImg" jdbcType="VARCHAR"/>
+        <result column="is_default" property="isDefault" jdbcType="VARCHAR"/>
+        <result column="bar_color" property="barColor" jdbcType="VARCHAR"/>
+        <result column="color" property="color" jdbcType="VARCHAR"/>
+        <result column="top_color" property="topColor" jdbcType="VARCHAR"/>
+        <result column="bottom_color" property="bottomColor" jdbcType="VARCHAR"/>
+        <result column="enable_flag" property="enableFlag" jdbcType="VARCHAR"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        article_skin_id, templete_img, is_default, bar_color, color, top_color, bottom_color,
+        enable_flag, create_user, create_time, update_user, update_time, sort
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from article_skin_stype
+        where article_skin_id = #{articleSkinId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from article_skin_stype
+        where article_skin_id = #{articleSkinId,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.wwmust.manage.system.model.ArticleSkinStype">
+        insert into article_skin_stype (article_skin_id, templete_img, is_default,
+        bar_color, color, top_color,
+        bottom_color, enable_flag, create_user,
+        create_time, update_user, update_time,
+        sort)
+        values (#{articleSkinId,jdbcType=BIGINT}, #{templeteImg,jdbcType=VARCHAR}, #{isDefault,jdbcType=VARCHAR},
+        #{barColor,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, #{topColor,jdbcType=VARCHAR},
+        #{bottomColor,jdbcType=VARCHAR}, #{enableFlag,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+        #{sort,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.wwmust.manage.system.model.ArticleSkinStype">
+        insert into article_skin_stype
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="articleSkinId != null">
+                article_skin_id,
+            </if>
+            <if test="templeteImg != null">
+                templete_img,
+            </if>
+            <if test="isDefault != null">
+                is_default,
+            </if>
+            <if test="barColor != null">
+                bar_color,
+            </if>
+            <if test="color != null">
+                color,
+            </if>
+            <if test="topColor != null">
+                top_color,
+            </if>
+            <if test="bottomColor != null">
+                bottom_color,
+            </if>
+            <if test="enableFlag != null">
+                enable_flag,
+            </if>
+            <if test="createUser != null">
+                create_user,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateUser != null">
+                update_user,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="articleSkinId != null">
+                #{articleSkinId,jdbcType=BIGINT},
+            </if>
+            <if test="templeteImg != null">
+                #{templeteImg,jdbcType=VARCHAR},
+            </if>
+            <if test="isDefault != null">
+                #{isDefault,jdbcType=VARCHAR},
+            </if>
+            <if test="barColor != null">
+                #{barColor,jdbcType=VARCHAR},
+            </if>
+            <if test="color != null">
+                #{color,jdbcType=VARCHAR},
+            </if>
+            <if test="topColor != null">
+                #{topColor,jdbcType=VARCHAR},
+            </if>
+            <if test="bottomColor != null">
+                #{bottomColor,jdbcType=VARCHAR},
+            </if>
+            <if test="enableFlag != null">
+                #{enableFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wwmust.manage.system.model.ArticleSkinStype">
+        update article_skin_stype
+        <set>
+            <if test="templeteImg != null">
+                templete_img = #{templeteImg,jdbcType=VARCHAR},
+            </if>
+            <if test="isDefault != null">
+                is_default = #{isDefault,jdbcType=VARCHAR},
+            </if>
+            <if test="barColor != null">
+                bar_color = #{barColor,jdbcType=VARCHAR},
+            </if>
+            <if test="color != null">
+                color = #{color,jdbcType=VARCHAR},
+            </if>
+            <if test="topColor != null">
+                top_color = #{topColor,jdbcType=VARCHAR},
+            </if>
+            <if test="bottomColor != null">
+                bottom_color = #{bottomColor,jdbcType=VARCHAR},
+            </if>
+            <if test="enableFlag != null">
+                enable_flag = #{enableFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                create_user = #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+        </set>
+        where article_skin_id = #{articleSkinId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wwmust.manage.system.model.ArticleSkinStype">
+        update article_skin_stype
+        set templete_img = #{templeteImg,jdbcType=VARCHAR},
+        is_default = #{isDefault,jdbcType=VARCHAR},
+        bar_color = #{barColor,jdbcType=VARCHAR},
+        color = #{color,jdbcType=VARCHAR},
+        top_color = #{topColor,jdbcType=VARCHAR},
+        bottom_color = #{bottomColor,jdbcType=VARCHAR},
+        enable_flag = #{enableFlag,jdbcType=VARCHAR},
+        create_user = #{createUser,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_user = #{updateUser,jdbcType=VARCHAR},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        sort = #{sort,jdbcType=INTEGER}
+        where article_skin_id = #{articleSkinId,jdbcType=BIGINT}
+    </update>
+</mapper>

@@ -1,14 +1,22 @@
 package com.wwmust.manage.system.dao;
 
 import com.wwmust.manage.system.model.SysStar;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
-import tk.mybatis.mapper.common.BaseMapper;
 
 import java.util.List;
-
 @Repository
-public interface SysStarMapper extends BaseMapper<SysStar> {
-    @Select("select * from sys_star")
+public interface SysStarMapper {
+    int deleteByPrimaryKey(Long sysStarId);
+
+    int insert(SysStar record);
+
+    int insertSelective(SysStar record);
+
+    SysStar selectByPrimaryKey(Long sysStarId);
+
+    int updateByPrimaryKeySelective(SysStar record);
+
+    int updateByPrimaryKey(SysStar record);
+
     List<SysStar> getSysStarList();
 }

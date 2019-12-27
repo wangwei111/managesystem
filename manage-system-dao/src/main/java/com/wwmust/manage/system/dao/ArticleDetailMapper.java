@@ -1,15 +1,24 @@
 package com.wwmust.manage.system.dao;
 
 import com.wwmust.manage.system.model.ArticleDetail;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import tk.mybatis.mapper.common.BaseMapper;
 
 import java.util.List;
 
 @Repository
-public interface ArticleDetailMapper extends BaseMapper<ArticleDetail> {
+public interface ArticleDetailMapper {
+    int deleteByPrimaryKey(Long articleDetailId);
 
-    @Select("select * from article_detail where 1=1 and #{param}")
-    List<ArticleDetail> getArticleDeatilList(String param);
+    int insert(ArticleDetail record);
+
+    int insertSelective(ArticleDetail record);
+
+    ArticleDetail selectByPrimaryKey(Long articleDetailId);
+
+    int updateByPrimaryKeySelective(ArticleDetail record);
+
+    int updateByPrimaryKey(ArticleDetail record);
+
+    List<ArticleDetail> getArticleDeatilList(@Param("sql") String sql);
 }

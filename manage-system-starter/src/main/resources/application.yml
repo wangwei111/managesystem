@@ -13,8 +13,8 @@ pagehelper:
     row-bounds-with-count: true
     support-methods-arguments: true
 mybatis:
-  type-aliases-package: com.wwmust.manage.system.dao
-  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.wwmust.manage.system.model
+  mapper-locations: classpath*:com/wwmust/manage/system/mapper/*.xml
 
 
 login:

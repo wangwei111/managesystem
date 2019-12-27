@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wwmust.manage.system.dao.ArticleMapper">
+    <resultMap id="BaseResultMap" type="com.wwmust.manage.system.model.Article">
+        <id column="article_id" property="articleId" jdbcType="BIGINT"/>
+        <result column="category_id" property="categoryId" jdbcType="BIGINT"/>
+        <result column="skin_id" property="skinId" jdbcType="BIGINT"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="topic_id" property="topicId" jdbcType="BIGINT"/>
+        <result column="is_default" property="isDefault" jdbcType="VARCHAR"/>
+        <result column="is_hot" property="isHot" jdbcType="VARCHAR"/>
+        <result column="is_sensitive" property="isSensitive" jdbcType="VARCHAR"/>
+        <result column="longitude" property="longitude" jdbcType="DECIMAL"/>
+        <result column="latitude" property="latitude" jdbcType="DECIMAL"/>
+        <result column="is_public" property="isPublic" jdbcType="VARCHAR"/>
+        <result column="is_draft" property="isDraft" jdbcType="VARCHAR"/>
+        <result column="article_title" property="articleTitle" jdbcType="VARCHAR"/>
+        <result column="source" property="source" jdbcType="VARCHAR"/>
+        <result column="is_audit" property="isAudit" jdbcType="VARCHAR"/>
+        <result column="page_view_num" property="pageViewNum" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.wwmust.manage.system.model.Article" extends="BaseResultMap">
+        <result column="article_content" property="articleContent" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        article_id, category_id, skin_id, create_user, create_time, update_user, update_time,
+        topic_id, is_default, is_hot, is_sensitive, longitude, latitude, is_public, is_draft,
+        article_title, source, is_audit, page_view_num
+    </sql>
+    <sql id="Blob_Column_List">
+        article_content
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from article
+        where article_id = #{articleId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from article
+        where article_id = #{articleId,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.wwmust.manage.system.model.Article">
+        insert into article (article_id, category_id, skin_id,
+        create_user, create_time, update_user,
+        update_time, topic_id, is_default,
+        is_hot, is_sensitive, longitude,
+        latitude, is_public, is_draft,
+        article_title, source, is_audit,
+        page_view_num, article_content)
+        values (#{articleId,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT}, #{skinId,jdbcType=BIGINT},
+        #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR},
+        #{updateTime,jdbcType=TIMESTAMP}, #{topicId,jdbcType=BIGINT}, #{isDefault,jdbcType=VARCHAR},
+        #{isHot,jdbcType=VARCHAR}, #{isSensitive,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL},
+        #{latitude,jdbcType=DECIMAL}, #{isPublic,jdbcType=VARCHAR}, #{isDraft,jdbcType=VARCHAR},
+        #{articleTitle,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{isAudit,jdbcType=VARCHAR},
+        #{pageViewNum,jdbcType=INTEGER}, #{articleContent,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.wwmust.manage.system.model.Article">
+        insert into article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="articleId != null">
+                article_id,
+            </if>
+            <if test="categoryId != null">
+                category_id,
+            </if>
+            <if test="skinId != null">
+                skin_id,
+            </if>
+            <if test="createUser != null">
+                create_user,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateUser != null">
+                update_user,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="topicId != null">
+                topic_id,
+            </if>
+            <if test="isDefault != null">
+                is_default,
+            </if>
+            <if test="isHot != null">
+                is_hot,
+            </if>
+            <if test="isSensitive != null">
+                is_sensitive,
+            </if>
+            <if test="longitude != null">
+                longitude,
+            </if>
+            <if test="latitude != null">
+                latitude,
+            </if>
+            <if test="isPublic != null">
+                is_public,
+            </if>
+            <if test="isDraft != null">
+                is_draft,
+            </if>
+            <if test="articleTitle != null">
+                article_title,
+            </if>
+            <if test="source != null">
+                source,
+            </if>
+            <if test="isAudit != null">
+                is_audit,
+            </if>
+            <if test="pageViewNum != null">
+                page_view_num,
+            </if>
+            <if test="articleContent != null">
+                article_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="articleId != null">
+                #{articleId,jdbcType=BIGINT},
+            </if>
+            <if test="categoryId != null">
+                #{categoryId,jdbcType=BIGINT},
+            </if>
+            <if test="skinId != null">
+                #{skinId,jdbcType=BIGINT},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="topicId != null">
+                #{topicId,jdbcType=BIGINT},
+            </if>
+            <if test="isDefault != null">
+                #{isDefault,jdbcType=VARCHAR},
+            </if>
+            <if test="isHot != null">
+                #{isHot,jdbcType=VARCHAR},
+            </if>
+            <if test="isSensitive != null">
+                #{isSensitive,jdbcType=VARCHAR},
+            </if>
+            <if test="longitude != null">
+                #{longitude,jdbcType=DECIMAL},
+            </if>
+            <if test="latitude != null">
+                #{latitude,jdbcType=DECIMAL},
+            </if>
+            <if test="isPublic != null">
+                #{isPublic,jdbcType=VARCHAR},
+            </if>
+            <if test="isDraft != null">
+                #{isDraft,jdbcType=VARCHAR},
+            </if>
+            <if test="articleTitle != null">
+                #{articleTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=VARCHAR},
+            </if>
+            <if test="isAudit != null">
+                #{isAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="pageViewNum != null">
+                #{pageViewNum,jdbcType=INTEGER},
+            </if>
+            <if test="articleContent != null">
+                #{articleContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wwmust.manage.system.model.Article">
+        update article
+        <set>
+            <if test="categoryId != null">
+                category_id = #{categoryId,jdbcType=BIGINT},
+            </if>
+            <if test="skinId != null">
+                skin_id = #{skinId,jdbcType=BIGINT},
+            </if>
+            <if test="createUser != null">
+                create_user = #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="topicId != null">
+                topic_id = #{topicId,jdbcType=BIGINT},
+            </if>
+            <if test="isDefault != null">
+                is_default = #{isDefault,jdbcType=VARCHAR},
+            </if>
+            <if test="isHot != null">
+                is_hot = #{isHot,jdbcType=VARCHAR},
+            </if>
+            <if test="isSensitive != null">
+                is_sensitive = #{isSensitive,jdbcType=VARCHAR},
+            </if>
+            <if test="longitude != null">
+                longitude = #{longitude,jdbcType=DECIMAL},
+            </if>
+            <if test="latitude != null">
+                latitude = #{latitude,jdbcType=DECIMAL},
+            </if>
+            <if test="isPublic != null">
+                is_public = #{isPublic,jdbcType=VARCHAR},
+            </if>
+            <if test="isDraft != null">
+                is_draft = #{isDraft,jdbcType=VARCHAR},
+            </if>
+            <if test="articleTitle != null">
+                article_title = #{articleTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="source != null">
+                source = #{source,jdbcType=VARCHAR},
+            </if>
+            <if test="isAudit != null">
+                is_audit = #{isAudit,jdbcType=VARCHAR},
+            </if>
+            <if test="pageViewNum != null">
+                page_view_num = #{pageViewNum,jdbcType=INTEGER},
+            </if>
+            <if test="articleContent != null">
+                article_content = #{articleContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where article_id = #{articleId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wwmust.manage.system.model.Article">
+        update article
+        set category_id = #{categoryId,jdbcType=BIGINT},
+        skin_id = #{skinId,jdbcType=BIGINT},
+        create_user = #{createUser,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_user = #{updateUser,jdbcType=VARCHAR},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        topic_id = #{topicId,jdbcType=BIGINT},
+        is_default = #{isDefault,jdbcType=VARCHAR},
+        is_hot = #{isHot,jdbcType=VARCHAR},
+        is_sensitive = #{isSensitive,jdbcType=VARCHAR},
+        longitude = #{longitude,jdbcType=DECIMAL},
+        latitude = #{latitude,jdbcType=DECIMAL},
+        is_public = #{isPublic,jdbcType=VARCHAR},
+        is_draft = #{isDraft,jdbcType=VARCHAR},
+        article_title = #{articleTitle,jdbcType=VARCHAR},
+        source = #{source,jdbcType=VARCHAR},
+        is_audit = #{isAudit,jdbcType=VARCHAR},
+        page_view_num = #{pageViewNum,jdbcType=INTEGER},
+        article_content = #{articleContent,jdbcType=LONGVARCHAR}
+        where article_id = #{articleId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wwmust.manage.system.model.Article">
+        update article
+        set category_id = #{categoryId,jdbcType=BIGINT},
+        skin_id = #{skinId,jdbcType=BIGINT},
+        create_user = #{createUser,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_user = #{updateUser,jdbcType=VARCHAR},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        topic_id = #{topicId,jdbcType=BIGINT},
+        is_default = #{isDefault,jdbcType=VARCHAR},
+        is_hot = #{isHot,jdbcType=VARCHAR},
+        is_sensitive = #{isSensitive,jdbcType=VARCHAR},
+        longitude = #{longitude,jdbcType=DECIMAL},
+        latitude = #{latitude,jdbcType=DECIMAL},
+        is_public = #{isPublic,jdbcType=VARCHAR},
+        is_draft = #{isDraft,jdbcType=VARCHAR},
+        article_title = #{articleTitle,jdbcType=VARCHAR},
+        source = #{source,jdbcType=VARCHAR},
+        is_audit = #{isAudit,jdbcType=VARCHAR},
+        page_view_num = #{pageViewNum,jdbcType=INTEGER}
+        where article_id = #{articleId,jdbcType=BIGINT}
+    </update>
+    <select id="list" resultMap="BaseResultMap">
+        select * from article where 1=1
+        <if test="article.categoryId !=null  and article.categoryId !='200' and article.categoryId != '300'">
+            and category_id = #{article.categoryId}
+        </if>
+        <if test='article.isHot== 1'>
+            and is_hot=1
+        </if>
+        <if test='article.isNew ==1'>
+            order by update_time desc
+        </if>
+
+    </select>
+
+</mapper>

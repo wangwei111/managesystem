@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wwmust.manage.system.dao.SysImageMapper">
+    <resultMap id="BaseResultMap" type="com.wwmust.manage.system.model.SysImage">
+        <id column="sys_img_id" property="sysImgId" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="is_sys" property="isSys" jdbcType="VARCHAR"/>
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="enable_flag" property="enableFlag" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="operate" property="operate" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        sys_img_id, user_id, is_sys, img_url, sort, enable_flag, create_time, update_time,
+        operate
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_image
+        where sys_img_id = #{sysImgId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sys_image
+        where sys_img_id = #{sysImgId,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.wwmust.manage.system.model.SysImage">
+        insert into sys_image (sys_img_id, user_id, is_sys,
+        img_url, sort, enable_flag,
+        create_time, update_time, operate
+        )
+        values (#{sysImgId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{isSys,jdbcType=VARCHAR},
+        #{imgUrl,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{enableFlag,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{operate,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.wwmust.manage.system.model.SysImage">
+        insert into sys_image
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysImgId != null">
+                sys_img_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="isSys != null">
+                is_sys,
+            </if>
+            <if test="imgUrl != null">
+                img_url,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="enableFlag != null">
+                enable_flag,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="operate != null">
+                operate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sysImgId != null">
+                #{sysImgId,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="isSys != null">
+                #{isSys,jdbcType=VARCHAR},
+            </if>
+            <if test="imgUrl != null">
+                #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="enableFlag != null">
+                #{enableFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operate != null">
+                #{operate,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wwmust.manage.system.model.SysImage">
+        update sys_image
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="isSys != null">
+                is_sys = #{isSys,jdbcType=VARCHAR},
+            </if>
+            <if test="imgUrl != null">
+                img_url = #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="enableFlag != null">
+                enable_flag = #{enableFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operate != null">
+                operate = #{operate,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where sys_img_id = #{sysImgId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wwmust.manage.system.model.SysImage">
+        update sys_image
+        set user_id = #{userId,jdbcType=BIGINT},
+        is_sys = #{isSys,jdbcType=VARCHAR},
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+        sort = #{sort,jdbcType=INTEGER},
+        enable_flag = #{enableFlag,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        operate = #{operate,jdbcType=VARCHAR}
+        where sys_img_id = #{sysImgId,jdbcType=BIGINT}
+    </update>
+
+    <select id="getImageList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from sys_image
+    </select>
+</mapper>

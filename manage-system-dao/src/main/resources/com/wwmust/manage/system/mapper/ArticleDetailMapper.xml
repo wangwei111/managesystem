@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wwmust.manage.system.dao.ArticleDetailMapper">
+    <resultMap id="BaseResultMap" type="com.wwmust.manage.system.model.ArticleDetail">
+        <id column="article_detail_id" property="articleDetailId" jdbcType="BIGINT"/>
+        <result column="approval_num" property="approvalNum" jdbcType="INTEGER"/>
+        <result column="oppose_num" property="opposeNum" jdbcType="INTEGER"/>
+        <result column="collect_num" property="collectNum" jdbcType="INTEGER"/>
+        <result column="view_num" property="viewNum" jdbcType="INTEGER"/>
+        <result column="attention_num" property="attentionNum" jdbcType="INTEGER"/>
+        <result column="article_id" property="articleId" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        article_detail_id, approval_num, oppose_num, collect_num, view_num, attention_num,
+        article_id
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from article_detail
+        where article_detail_id = #{articleDetailId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from article_detail
+        where article_detail_id = #{articleDetailId,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.wwmust.manage.system.model.ArticleDetail">
+        insert into article_detail (article_detail_id, approval_num, oppose_num,
+        collect_num, view_num, attention_num,
+        article_id)
+        values (#{articleDetailId,jdbcType=BIGINT}, #{approvalNum,jdbcType=INTEGER}, #{opposeNum,jdbcType=INTEGER},
+        #{collectNum,jdbcType=INTEGER}, #{viewNum,jdbcType=INTEGER}, #{attentionNum,jdbcType=INTEGER},
+        #{articleId,jdbcType=BIGINT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.wwmust.manage.system.model.ArticleDetail">
+        insert into article_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="articleDetailId != null">
+                article_detail_id,
+            </if>
+            <if test="approvalNum != null">
+                approval_num,
+            </if>
+            <if test="opposeNum != null">
+                oppose_num,
+            </if>
+            <if test="collectNum != null">
+                collect_num,
+            </if>
+            <if test="viewNum != null">
+                view_num,
+            </if>
+            <if test="attentionNum != null">
+                attention_num,
+            </if>
+            <if test="articleId != null">
+                article_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="articleDetailId != null">
+                #{articleDetailId,jdbcType=BIGINT},
+            </if>
+            <if test="approvalNum != null">
+                #{approvalNum,jdbcType=INTEGER},
+            </if>
+            <if test="opposeNum != null">
+                #{opposeNum,jdbcType=INTEGER},
+            </if>
+            <if test="collectNum != null">
+                #{collectNum,jdbcType=INTEGER},
+            </if>
+            <if test="viewNum != null">
+                #{viewNum,jdbcType=INTEGER},
+            </if>
+            <if test="attentionNum != null">
+                #{attentionNum,jdbcType=INTEGER},
+            </if>
+            <if test="articleId != null">
+                #{articleId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wwmust.manage.system.model.ArticleDetail">
+        update article_detail
+        <set>
+            <if test="approvalNum != null">
+                approval_num = #{approvalNum,jdbcType=INTEGER},
+            </if>
+            <if test="opposeNum != null">
+                oppose_num = #{opposeNum,jdbcType=INTEGER},
+            </if>
+            <if test="collectNum != null">
+                collect_num = #{collectNum,jdbcType=INTEGER},
+            </if>
+            <if test="viewNum != null">
+                view_num = #{viewNum,jdbcType=INTEGER},
+            </if>
+            <if test="attentionNum != null">
+                attention_num = #{attentionNum,jdbcType=INTEGER},
+            </if>
+            <if test="articleId != null">
+                article_id = #{articleId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where article_detail_id = #{articleDetailId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wwmust.manage.system.model.ArticleDetail">
+        update article_detail
+        set approval_num = #{approvalNum,jdbcType=INTEGER},
+        oppose_num = #{opposeNum,jdbcType=INTEGER},
+        collect_num = #{collectNum,jdbcType=INTEGER},
+        view_num = #{viewNum,jdbcType=INTEGER},
+        attention_num = #{attentionNum,jdbcType=INTEGER},
+        article_id = #{articleId,jdbcType=BIGINT}
+        where article_detail_id = #{articleDetailId,jdbcType=BIGINT}
+    </update>
+
+    <select id="getArticleDeatilList" resultMap="BaseResultMap">
+        select * from article_detail where 1=1 and #{sql}
+    </select>
+</mapper>

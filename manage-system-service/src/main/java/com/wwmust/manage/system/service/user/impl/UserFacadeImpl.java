@@ -12,23 +12,20 @@ import com.alibaba.fastjson.JSON;
 import com.wwmust.manage.system.common.exception.DataInvalidataException;
 import com.wwmust.manage.system.config.SnowflakeWorker;
 import com.wwmust.manage.system.config.redis.RedisKitWithSpringRedisTemplate;
-import com.wwmust.manage.system.dao.UserMpper;
+import com.wwmust.manage.system.dao.SysUserMapper;
 import com.wwmust.manage.system.facade.UserFacade;
 import com.wwmust.manage.system.facade.param.LoginUserParam;
 import com.wwmust.manage.system.facade.param.RegisterUserParam;
-import com.wwmust.manage.system.facade.resp.AdminResp;
 import com.wwmust.manage.system.facade.resp.UserInfoResp;
-import com.wwmust.manage.system.model.User;
+import com.wwmust.manage.system.model.SysUser;
 import com.wwmust.manage.system.service.units.Md5Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
-import sun.rmi.runtime.Log;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +46,7 @@ public class UserFacadeImpl implements UserFacade {
     private  static  final Logger log =  LoggerFactory.getLogger(UserFacadeImpl.class.getSimpleName());
 
     @Autowired
-    private UserMpper userMpper;
+    private SysUserMapper userMpper;
 
 
     @Autowired
@@ -65,13 +62,13 @@ public class UserFacadeImpl implements UserFacade {
     public UserInfoResp userLogin(LoginUserParam loginUserParam) throws Exception {
         Assert.isTrue(!StringUtils.isEmpty(loginUserParam.getUsername()),"用户名不能为空！");
         Assert.isTrue(!StringUtils.isEmpty(loginUserParam.getPassword()),"密码不能为空！");
-        User user = userMpper.chickUserName(loginUserParam.getUsername());
+        SysUser user = userMpper.chickUserName(loginUserParam.getUsername());
         UserInfoResp userInfoResp = new UserInfoResp();
         if(user !=null){
             boolean verify = Md5Util.checkpassword(loginUserParam.getPassword(),  user.getPassword());
             if(verify){
                 //生成token
-                String token=user.getUsername()+loginUserParam.getPassword()+System.currentTimeMillis();
+                String token = user.getAccount() + loginUserParam.getPassword() + System.currentTimeMillis();
                 //存在redis中
                 redisKitWithSpringRedisTemplate.setIfAbsent(Md5Util.EncoderByMd5(token),user,30, TimeUnit.MINUTES);
                 userInfoResp.setToken(Md5Util.EncoderByMd5(token));
@@ -102,10 +99,10 @@ public class UserFacadeImpl implements UserFacade {
     public UserInfoResp register(RegisterUserParam registerUserParam) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         Assert.isTrue(!StringUtils.isEmpty(registerUserParam.getUsername()),"用户名不能为空！");
         Assert.isTrue(!StringUtils.isEmpty(registerUserParam.getPassword()),"密码不能为空！");
-        User user = userMpper.chickUserName(registerUserParam.getUsername());
+        SysUser user = userMpper.chickUserName(registerUserParam.getUsername());
         UserInfoResp userInfoResp = new UserInfoResp();
         if(user == null){
-            user =new User();
+            user = new SysUser();
             //加密
             String password = Md5Util.EncoderByMd5(registerUserParam.getPassword());
             registerUserParam.setPassword(password);

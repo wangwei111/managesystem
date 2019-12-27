@@ -8,7 +8,6 @@
  **/
 package com.wwmust.manage.system.facade.resp.category;
 
-import javax.persistence.Column;
 import java.util.Date;
 
 /**

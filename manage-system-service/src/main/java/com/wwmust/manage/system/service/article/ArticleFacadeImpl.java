@@ -10,7 +10,6 @@ package com.wwmust.manage.system.service.article;
 
 import com.github.pagehelper.PageHelper;
 import com.wwmust.manage.system.common.exception.DataInvalidataException;
-import com.wwmust.manage.system.common.exception.SystemException;
 import com.wwmust.manage.system.common.utils.DateUtil;
 import com.wwmust.manage.system.config.SnowflakeWorker;
 import com.wwmust.manage.system.dao.*;
@@ -20,11 +19,7 @@ import com.wwmust.manage.system.facade.param.article.ArticleParam;
 import com.wwmust.manage.system.facade.param.article.ArticleQueryParam;
 import com.wwmust.manage.system.facade.resp.article.ArticleResp;
 import com.wwmust.manage.system.facade.resp.article.ArticleSkinStypeResp;
-import com.wwmust.manage.system.model.ArticleDetail;
-import com.wwmust.manage.system.model.SysImage;
-import com.wwmust.manage.system.model.SysStar;
-import com.wwmust.manage.system.model.article.Article;
-import com.wwmust.manage.system.model.article.ArticleSkinStype;
+import com.wwmust.manage.system.model.*;
 import com.wwmust.manage.system.service.fengin.SensitiveFengin;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -71,7 +66,7 @@ public class ArticleFacadeImpl implements ArticleFacade {
      */
     @Override
     public List<ArticleSkinStypeResp> getSkinType(Long articleSkinTypeId) {
-        try {
+       /* try {
             List<ArticleSkinStype>  articleSkinStypes =   articleSkinStypeMapper.getSkinType(articleSkinTypeId);
             if(!CollectionUtils.isEmpty(articleSkinStypes)){
                 List<ArticleSkinStypeResp> articleSkinStypeResps = new ArrayList<>(articleSkinStypes.size());
@@ -85,7 +80,7 @@ public class ArticleFacadeImpl implements ArticleFacade {
         }catch (Exception e){
             log.error("查询皮肤异常：{}" ,e.getMessage());
             throw  new SystemException("系统异常");
-        }
+        }*/
         return null;
     }
 
@@ -136,11 +131,11 @@ public class ArticleFacadeImpl implements ArticleFacade {
             //最热
             ariticleDto.setCategoryId(new Long("200"));
         }
-        if(param.getCategoryId().toString().equals("200")){
+        if (ariticleDto.getCategoryId() != null && ariticleDto.getCategoryId().toString().equals("200")) {
             ariticleDto.setIsHot("1");
             ariticleDto.setCategoryId(null);
         }
-        if(param.getCategoryId().toString().equals("300")){
+        if (ariticleDto.getCategoryId() != null && ariticleDto.getCategoryId().toString().equals("300")) {
             ariticleDto.setIsNew("1");
             ariticleDto.setCategoryId(null);
         }
@@ -171,17 +166,25 @@ public class ArticleFacadeImpl implements ArticleFacade {
                 String timeDifference = DateUtil.getTimeDifference(article.getUpdateTime(), new Date());
                 resp.setTime(timeDifference);
                 BeanUtils.copyProperties(article,resp);
-
                 resp.setSource(sysStars.get(0).getStarName());
-                finalDetailList.forEach(detail->{
-                    if( detail.getArticleId().equals(article.getArticleId())){
-                       resp.setApprovalNum(detail.getApprovalNum());
-                       resp.setAttentionNum(detail.getAttentionNum());
-                       resp.setCollectNum(detail.getCollectNum());
-                       resp.setOpposeNum(detail.getOpposeNum());
-                       resp.setViewNum(detail.getViewNum());
-                   }
-                });
+                if (finalDetailList != null) {
+                    finalDetailList.forEach(detail -> {
+                        if (detail.getArticleId().equals(article.getArticleId())) {
+                            resp.setApprovalNum(detail.getApprovalNum());
+                            resp.setAttentionNum(detail.getAttentionNum());
+                            resp.setCollectNum(detail.getCollectNum());
+                            resp.setOpposeNum(detail.getOpposeNum());
+                            resp.setViewNum(detail.getViewNum());
+                        }
+                    });
+                } else {
+                    resp.setApprovalNum(0);
+                    resp.setAttentionNum(0);
+                    resp.setCollectNum(0);
+                    resp.setOpposeNum(0);
+                    resp.setViewNum(0);
+                }
+
                 resps.add(resp);
             });
         }

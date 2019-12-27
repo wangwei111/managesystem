@@ -9,7 +9,7 @@
 package com.wwmust.manage.system.service.category;
 
 import com.wwmust.manage.system.common.exception.SystemException;
-import com.wwmust.manage.system.dao.CategoryMapper;
+import com.wwmust.manage.system.dao.FndCategoryMapper;
 import com.wwmust.manage.system.facade.CategoryFacade;
 import com.wwmust.manage.system.facade.resp.category.CategoryResp;
 import com.wwmust.manage.system.model.FndCategory;
@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,7 @@ import java.util.List;
 @Slf4j
 public class CategoryFacadeImpl implements CategoryFacade{
     @Autowired
-    private CategoryMapper  categoryMapper;
+    private FndCategoryMapper categoryMapper;
 
     /**
      * 查询分类信息

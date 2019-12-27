@@ -12,6 +12,10 @@ public class Article {
 
     private String createUser;
 
+    private String nickName;
+
+    private String userImgUrl;
+
     private Date createTime;
 
     private String updateUser;
@@ -43,6 +47,43 @@ public class Article {
     private Integer pageViewNum;
 
     private String articleContent;
+    //星球
+    private String sysStarId;
+    //名称
+    private String sysStarName;
+
+
+    public String getSysStarId() {
+        return sysStarId;
+    }
+
+    public void setSysStarId(String sysStarId) {
+        this.sysStarId = sysStarId;
+    }
+
+    public String getSysStarName() {
+        return sysStarName;
+    }
+
+    public void setSysStarName(String sysStarName) {
+        this.sysStarName = sysStarName;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getUserImgUrl() {
+        return userImgUrl;
+    }
+
+    public void setUserImgUrl(String userImgUrl) {
+        this.userImgUrl = userImgUrl;
+    }
 
     public Long getArticleId() {
         return articleId;

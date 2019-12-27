@@ -25,6 +25,32 @@
     <resultMap id="ResultMapWithBLOBs" type="com.wwmust.manage.system.model.Article" extends="BaseResultMap">
         <result column="article_content" property="articleContent" jdbcType="LONGVARCHAR"/>
     </resultMap>
+
+
+
+    <resultMap id="ArticleResultMap" type="com.wwmust.manage.system.model.Article">
+        <id column="article_id" property="articleId" jdbcType="BIGINT"/>
+        <result column="category_id" property="categoryId" jdbcType="BIGINT"/>
+        <result column="skin_id" property="skinId" jdbcType="BIGINT"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="topic_id" property="topicId" jdbcType="BIGINT"/>
+        <result column="is_default" property="isDefault" jdbcType="VARCHAR"/>
+        <result column="is_hot" property="isHot" jdbcType="VARCHAR"/>
+        <result column="is_sensitive" property="isSensitive" jdbcType="VARCHAR"/>
+        <result column="longitude" property="longitude" jdbcType="DECIMAL"/>
+        <result column="latitude" property="latitude" jdbcType="DECIMAL"/>
+        <result column="is_public" property="isPublic" jdbcType="VARCHAR"/>
+        <result column="is_draft" property="isDraft" jdbcType="VARCHAR"/>
+        <result column="article_title" property="articleTitle" jdbcType="VARCHAR"/>
+        <result column="source" property="source" jdbcType="VARCHAR"/>
+        <result column="is_audit" property="isAudit" jdbcType="VARCHAR"/>
+        <result column="nickName" property="nickName" jdbcType="VARCHAR"/>
+        <result column="userImgUrl" property="userImgUrl" jdbcType="VARCHAR"/>
+
+    </resultMap>
     <sql id="Base_Column_List">
         article_id, category_id, skin_id, create_user, create_time, update_user, update_time,
         topic_id, is_default, is_hot, is_sensitive, longitude, latitude, is_public, is_draft,
@@ -296,16 +322,18 @@
         page_view_num = #{pageViewNum,jdbcType=INTEGER}
         where article_id = #{articleId,jdbcType=BIGINT}
     </update>
-    <select id="list" resultMap="BaseResultMap">
-        select * from article where 1=1
+    <select id="list" resultMap="ArticleResultMap">
+        select a.* ,b.nickname as nickName ,b.user_img as userImgUrl from article a
+        LEFT JOIN sys_user b
+        on a.create_user = b.user_id where 1=1
         <if test="article.categoryId !=null  and article.categoryId !='200' and article.categoryId != '300'">
-            and category_id = #{article.categoryId}
+            and a.category_id = #{article.categoryId}
         </if>
         <if test='article.isHot== 1'>
-            and is_hot=1
+            and a.is_hot=1
         </if>
         <if test='article.isNew ==1'>
-            order by update_time desc
+            order by a.update_time desc
         </if>
 
     </select>

@@ -139,10 +139,10 @@ public class ArticleFacadeImpl implements ArticleFacade {
             ariticleDto.setIsNew("1");
             ariticleDto.setCategoryId(null);
         }
-       List<SysImage> sysImages =  sysImageMapper.getImageList();
+     /*  List<SysImage> sysImages =  sysImageMapper.getImageList();
 
        List<SysStar> sysStars =  sysStarMapper.getSysStarList();
-
+*/
 
         List<Article> articles=  articleMapper.list(ariticleDto);
         List<ArticleResp> resps =  new ArrayList<>();
@@ -166,7 +166,9 @@ public class ArticleFacadeImpl implements ArticleFacade {
                 String timeDifference = DateUtil.getTimeDifference(article.getUpdateTime(), new Date());
                 resp.setTime(timeDifference);
                 BeanUtils.copyProperties(article,resp);
-                resp.setSource(sysStars.get(0).getStarName());
+                resp.setUserId(article.getCreateUser());
+                resp.setUserImgUrl(article.getUserImgUrl());
+                resp.setUserName(article.getNickName());
                 if (finalDetailList != null) {
                     finalDetailList.forEach(detail -> {
                         if (detail.getArticleId().equals(article.getArticleId())) {
@@ -175,6 +177,8 @@ public class ArticleFacadeImpl implements ArticleFacade {
                             resp.setCollectNum(detail.getCollectNum());
                             resp.setOpposeNum(detail.getOpposeNum());
                             resp.setViewNum(detail.getViewNum());
+                            resp.setSysStarId(detail.getSysStarId());
+                            resp.setSysStarName(detail.getSysStarName());
                         }
                     });
                 } else {

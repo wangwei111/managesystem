@@ -26,13 +26,10 @@ public class ArticleResp{
 
     //创建人id
     private String createUser;
-    //创建人头像
-    private  String createUserImgUrl;
     //话题id
     private  Long topicId;
     //话题名称
     private String topicName;
-
 
     //是否公开
     private String isPublic;
@@ -50,6 +47,10 @@ public class ArticleResp{
     private String userName;
     private String userImgUrl;
 
+    //星球
+    private String sysStarId;
+    //名称
+    private String sysStarName;
 
 
 
@@ -75,8 +76,6 @@ public class ArticleResp{
      * 关注数
      */
     private Integer attentionNum;
-
-
     //来源
     private String source;
 
@@ -86,6 +85,21 @@ public class ArticleResp{
     //文章标题
     private  String articleTitle;
 
+    public String getSysStarId() {
+        return sysStarId;
+    }
+
+    public void setSysStarId(String sysStarId) {
+        this.sysStarId = sysStarId;
+    }
+
+    public String getSysStarName() {
+        return sysStarName;
+    }
+
+    public void setSysStarName(String sysStarName) {
+        this.sysStarName = sysStarName;
+    }
 
     public String getUserId() {
         return userId;
@@ -165,15 +179,6 @@ public class ArticleResp{
 
     public void setSource(String source) {
         this.source = source;
-    }
-
-
-    public String getCreateUserImgUrl() {
-        return createUserImgUrl;
-    }
-
-    public void setCreateUserImgUrl(String createUserImgUrl) {
-        this.createUserImgUrl = createUserImgUrl;
     }
 
     public String getTopicName() {

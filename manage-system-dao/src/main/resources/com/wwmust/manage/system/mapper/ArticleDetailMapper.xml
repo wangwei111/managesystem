@@ -9,10 +9,12 @@
         <result column="view_num" property="viewNum" jdbcType="INTEGER"/>
         <result column="attention_num" property="attentionNum" jdbcType="INTEGER"/>
         <result column="article_id" property="articleId" jdbcType="BIGINT"/>
+        <result column="sys_star_id" property="sysStarId" jdbcType="VARCHAR"/>
+        <result column="sysStarName" property="sysStarName" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
         article_detail_id, approval_num, oppose_num, collect_num, view_num, attention_num,
-        article_id
+        article_id,sys_star_id
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
@@ -117,6 +119,10 @@
     </update>
 
     <select id="getArticleDeatilList" resultMap="BaseResultMap">
-        select * from article_detail where 1=1 and #{sql}
+        SELECT a.*,b.star_name as sysStarName
+         from article_detail a
+        LEFT JOIN sys_star b
+        on a.sys_star_id=b.sys_star_id
+        where 1=1 and #{sql}
     </select>
 </mapper>

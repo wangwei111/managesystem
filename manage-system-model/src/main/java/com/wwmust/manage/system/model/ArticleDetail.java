@@ -15,6 +15,26 @@ public class ArticleDetail {
 
     private Long articleId;
 
+    private String sysStarId;
+    private String sysStarName;
+
+
+    public String getSysStarId() {
+        return sysStarId;
+    }
+
+    public void setSysStarId(String sysStarId) {
+        this.sysStarId = sysStarId;
+    }
+
+    public String getSysStarName() {
+        return sysStarName;
+    }
+
+    public void setSysStarName(String sysStarName) {
+        this.sysStarName = sysStarName;
+    }
+
     public Long getArticleDetailId() {
         return articleDetailId;
     }

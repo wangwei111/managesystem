@@ -606,7 +606,7 @@ public class DateUtil {
 		float hourOfBettwenTwoDate = getHourOfBettwenTwoDate(start, end);
 		if(hourOfBettwenTwoDate >=24){
 			int daysOfBettwenTwoDate = getDaysOfBettwenTwoDate(start, end);
-			if(daysOfBettwenTwoDate >= 30){
+			if(daysOfBettwenTwoDate <= 30){
 				return  daysOfBettwenTwoDate+"天前";
 			}else {
 				int i = month() - getMonthByDate(start);

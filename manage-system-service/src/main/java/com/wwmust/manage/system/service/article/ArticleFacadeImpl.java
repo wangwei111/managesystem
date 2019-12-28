@@ -10,13 +10,16 @@ package com.wwmust.manage.system.service.article;
 
 import com.github.pagehelper.PageHelper;
 import com.wwmust.manage.system.common.exception.DataInvalidataException;
+import com.wwmust.manage.system.common.exception.SystemException;
 import com.wwmust.manage.system.common.utils.DateUtil;
 import com.wwmust.manage.system.config.SnowflakeWorker;
 import com.wwmust.manage.system.dao.*;
+import com.wwmust.manage.system.dto.article.ArticleDetailDto;
 import com.wwmust.manage.system.dto.article.ArticleDto;
 import com.wwmust.manage.system.facade.ArticleFacade;
 import com.wwmust.manage.system.facade.param.article.ArticleParam;
 import com.wwmust.manage.system.facade.param.article.ArticleQueryParam;
+import com.wwmust.manage.system.facade.resp.article.ArticleDetailResp;
 import com.wwmust.manage.system.facade.resp.article.ArticleResp;
 import com.wwmust.manage.system.facade.resp.article.ArticleSkinStypeResp;
 import com.wwmust.manage.system.model.*;
@@ -110,6 +113,16 @@ public class ArticleFacadeImpl implements ArticleFacade {
             article.setArticleId(articleId);
             map.put("articleId",articleId);
             articleMapper.insertSelective(article);
+            ArticleDetail articleDetail = new ArticleDetail();
+            articleDetail.setArticleDetailId(articleId);
+            articleDetail.setArticleId(articleId);
+            articleDetail.setApprovalNum(0);
+            articleDetail.setCollectNum(0);
+            articleDetail.setAttentionNum(0);
+            articleDetail.setOpposeNum(0);
+            articleDetail.setViewNum(0);
+            articleDetail.setSysStarId("12");
+            articleDetailMapper.insertSelective(articleDetail);
         }
         return map;
     }
@@ -194,4 +207,39 @@ public class ArticleFacadeImpl implements ArticleFacade {
         }
         return resps;
     }
+
+    @Override
+    public ArticleDetailResp detail(String articleId) {
+        try {
+            ArticleDetailDto articleDetailDto = articleMapper.detail(articleId);
+            //阅读量加1
+            articleDetailMapper.updateDetail("3",articleId);
+            if (articleDetailDto != null) {
+                ArticleDetailResp resp = new ArticleDetailResp();
+                BeanUtils.copyProperties(articleDetailDto,resp);
+                resp.setUpdateTime(DateUtil.secFormat(articleDetailDto.getUpdateTime()));
+                resp.setCreateTime(DateUtil.secFormat(articleDetailDto.getCreateTime()));
+                resp.setUserName(articleDetailDto.getNickName());
+                resp.setUserId(articleDetailDto.getCreateUser());
+                return resp;
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw  new SystemException("系统异常请稍后重试！");
+        }
+    }
+
+    @Override
+    public void operat(String userId, String type, String articleId) {
+        if(!StringUtils.isEmpty(userId)){
+            if("1".equalsIgnoreCase(type)){
+                //关注 增加表关联
+            }
+            articleDetailMapper.updateDetail(type,articleId);
+        }else {
+            articleDetailMapper.updateDetail(type,articleId);
+        }
+    }
+
 }

@@ -21,4 +21,6 @@ public interface ArticleDetailMapper {
     int updateByPrimaryKey(ArticleDetail record);
 
     List<ArticleDetail> getArticleDeatilList(@Param("sql") String sql);
+
+    void updateDetail(@Param("type")String type,@Param("articleId") String articleId);
 }

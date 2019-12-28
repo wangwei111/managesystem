@@ -12,6 +12,7 @@ import com.wwmust.manage.system.config.response.JsonResult;
 import com.wwmust.manage.system.facade.ArticleFacade;
 import com.wwmust.manage.system.facade.param.article.ArticleParam;
 import com.wwmust.manage.system.facade.param.article.ArticleQueryParam;
+import com.wwmust.manage.system.facade.resp.article.ArticleDetailResp;
 import com.wwmust.manage.system.facade.resp.article.ArticleResp;
 import com.wwmust.manage.system.facade.resp.article.ArticleSkinStypeResp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,27 @@ public class ArticleController {
     public JsonResult<List<ArticleResp> > list(@RequestBody ArticleQueryParam param){
         List<ArticleResp>  articleResp = articleFacade.list(param);
         return JsonResult.okJsonResultWithData( articleResp);
+    }
+
+
+    /**
+     *查询列表
+     */
+    @GetMapping("api/article/detail/{articleId}")
+    public JsonResult<ArticleDetailResp > detail(@PathVariable String articleId){
+        ArticleDetailResp articleResp = articleFacade.detail(articleId);
+        return JsonResult.okJsonResultWithData( articleResp);
+    }
+
+
+
+    /**
+     *
+     */
+    @GetMapping("api/article/operat/{userId}/{type}/{articleId}")
+    public JsonResult operat(@PathVariable String userId,@PathVariable String type,@PathVariable String articleId){
+        articleFacade.operat(userId,type,articleId);
+        return JsonResult.okJsonResultWithData("成功！");
     }
 
 }

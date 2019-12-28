@@ -51,6 +51,36 @@
         <result column="userImgUrl" property="userImgUrl" jdbcType="VARCHAR"/>
 
     </resultMap>
+
+
+
+    <resultMap id="ArticleDetailResultMap" type="com.wwmust.manage.system.dto.article.ArticleDetailDto">
+        <id column="article_id" property="articleId" jdbcType="BIGINT"/>
+        <result column="category_id" property="categoryId" jdbcType="BIGINT"/>
+        <result column="skin_id" property="skinId" jdbcType="BIGINT"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="topic_id" property="topicId" jdbcType="BIGINT"/>
+        <result column="is_public" property="isPublic" jdbcType="VARCHAR"/>
+        <result column="is_draft" property="isDraft" jdbcType="VARCHAR"/>
+        <result column="article_title" property="articleTitle" jdbcType="VARCHAR"/>
+        <result column="source" property="source" jdbcType="VARCHAR"/>
+        <result column="is_audit" property="isAudit" jdbcType="VARCHAR"/>
+        <result column="nickName" property="nickName" jdbcType="VARCHAR"/>
+        <result column="userImgUrl" property="userImgUrl" jdbcType="VARCHAR"/>
+        <result column="source" property="source" jdbcType="VARCHAR"/>
+        <result column="article_content" property="articleContent" jdbcType="LONGVARCHAR"/>
+        <result column="articleDetailId" property="articleDetailId" jdbcType="BIGINT"/>
+        <result column="approvalNum" property="approvalNum" jdbcType="INTEGER"/>
+        <result column="opposeNum" property="opposeNum" jdbcType="INTEGER" />
+        <result column="collectNum" property="collectNum"  jdbcType="INTEGER"/>
+        <result column="viewNum" property="viewNum" jdbcType="INTEGER"/>
+        <result column="attentionNum" property="attentionNum" jdbcType="INTEGER" />
+
+
+    </resultMap>
+
     <sql id="Base_Column_List">
         article_id, category_id, skin_id, create_user, create_time, update_user, update_time,
         topic_id, is_default, is_hot, is_sensitive, longitude, latitude, is_public, is_draft,
@@ -336,6 +366,19 @@
             order by a.update_time desc
         </if>
 
+    </select>
+
+    <select id="detail" resultMap="ArticleDetailResultMap">
+        SELECT
+         a.article_id, a.category_id, a.skin_id, a.create_user, a.create_time, a.update_time,
+        a.topic_id,  a.is_hot, a.is_sensitive,  a.is_public, a.is_draft,
+        a.article_title, a.source, a.is_audit,a.article_content,a.source,
+        b.article_detail_id as articleDetailId, b.approval_num as approvalNum, b.oppose_num as opposeNum, b.collect_num as collectNum,
+         b.view_num as viewNum, b.attention_num as attentionNum,
+        c.nickname as nickName ,c.user_img as userImgUrl FROM article  a
+        LEFT JOIN article_detail b on a.article_id = b.article_id
+        LEFT JOIN sys_user c on a.create_user = c.user_id
+        where a.article_id =#{articleId}
     </select>
 
 </mapper>

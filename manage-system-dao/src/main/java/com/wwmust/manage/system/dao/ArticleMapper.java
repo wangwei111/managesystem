@@ -1,5 +1,6 @@
 package com.wwmust.manage.system.dao;
 
+import com.wwmust.manage.system.dto.article.ArticleDetailDto;
 import com.wwmust.manage.system.dto.article.ArticleDto;
 import com.wwmust.manage.system.model.Article;
 import org.apache.ibatis.annotations.Param;
@@ -24,4 +25,6 @@ public interface ArticleMapper {
     int updateByPrimaryKey(Article record);
 
     List<Article> list(@Param("article") ArticleDto articleDto);
+
+    ArticleDetailDto detail(@Param("articleId") String articleId);
 }

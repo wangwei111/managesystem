@@ -125,4 +125,25 @@
         on a.sys_star_id=b.sys_star_id
         where 1=1 and #{sql}
     </select>
+
+    <update id="updateDetail" parameterType ="string">
+      update  article_detail set
+      <if test="type ==0">
+          /*点赞数*/
+          approval_num=approval_num+1
+      </if>
+        <if test="type ==1">
+            /*关注数*/
+            attention_num = attention_num+1
+        </if>
+        <if test="type ==2">
+            /*转发数*/
+            collect_num = collect_num+1
+        </if>
+        <if test="type ==3">
+            /*浏览数*/
+            view_num =view_num+1
+        </if>
+        where article_id =#{articleId}
+    </update>
 </mapper>

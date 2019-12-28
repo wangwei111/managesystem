@@ -10,6 +10,7 @@ package com.wwmust.manage.system.facade;
 
 import com.wwmust.manage.system.facade.param.article.ArticleParam;
 import com.wwmust.manage.system.facade.param.article.ArticleQueryParam;
+import com.wwmust.manage.system.facade.resp.article.ArticleDetailResp;
 import com.wwmust.manage.system.facade.resp.article.ArticleResp;
 import com.wwmust.manage.system.facade.resp.article.ArticleSkinStypeResp;
 
@@ -41,4 +42,19 @@ public interface ArticleFacade {
      * @return
      */
     List<ArticleResp>  list(ArticleQueryParam param);
+
+    /**
+     * 根据文章的id获取文章详情
+     * @param articleId
+     * @return
+     */
+    ArticleDetailResp detail(String articleId);
+
+    /**
+     * 根据用户的类型，文章id更新文章数
+     * @param userId
+     * @param type
+     * @param articleId
+     */
+    void operat(String userId, String type, String articleId);
 }

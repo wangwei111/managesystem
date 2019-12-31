@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wwmust.manage.system.dao.OpinionMapper" >
+  <resultMap id="BaseResultMap" type="com.wwmust.manage.system.model.Opinion" >
+    <id column="opinion_id" property="opinionId" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="enable_ip" property="enableIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.wwmust.manage.system.model.Opinion" extends="BaseResultMap" >
+    <result column="opinion_name" property="opinionName" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    opinion_id, update_time, create_time, enable_ip
+  </sql>
+  <sql id="Blob_Column_List" >
+    opinion_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from opinion
+    where opinion_id = #{opinionId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from opinion
+    where opinion_id = #{opinionId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.wwmust.manage.system.model.Opinion" >
+    insert into opinion (opinion_id, update_time, create_time, 
+      enable_ip, opinion_name)
+    values (#{opinionId,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{enableIp,jdbcType=VARCHAR}, #{opinionName,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wwmust.manage.system.model.Opinion" >
+    insert into opinion
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="opinionId != null" >
+        opinion_id,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="enableIp != null" >
+        enable_ip,
+      </if>
+      <if test="opinionName != null" >
+        opinion_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="opinionId != null" >
+        #{opinionId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableIp != null" >
+        #{enableIp,jdbcType=VARCHAR},
+      </if>
+      <if test="opinionName != null" >
+        #{opinionName,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wwmust.manage.system.model.Opinion" >
+    update opinion
+    <set >
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableIp != null" >
+        enable_ip = #{enableIp,jdbcType=VARCHAR},
+      </if>
+      <if test="opinionName != null" >
+        opinion_name = #{opinionName,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where opinion_id = #{opinionId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wwmust.manage.system.model.Opinion" >
+    update opinion
+    set update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      enable_ip = #{enableIp,jdbcType=VARCHAR},
+      opinion_name = #{opinionName,jdbcType=LONGVARCHAR}
+    where opinion_id = #{opinionId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wwmust.manage.system.model.Opinion" >
+    update opinion
+    set update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      enable_ip = #{enableIp,jdbcType=VARCHAR}
+    where opinion_id = #{opinionId,jdbcType=BIGINT}
+  </update>
+</mapper>

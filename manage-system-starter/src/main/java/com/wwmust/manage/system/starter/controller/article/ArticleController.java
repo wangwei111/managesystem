@@ -18,6 +18,8 @@ import com.wwmust.manage.system.facade.resp.article.ArticleSkinStypeResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -74,12 +76,56 @@ public class ArticleController {
 
 
     /**
-     *
+     *查询详情
      */
     @GetMapping("api/article/operat/{userId}/{type}/{articleId}")
     public JsonResult operat(@PathVariable String userId,@PathVariable String type,@PathVariable String articleId){
         articleFacade.operat(userId,type,articleId);
         return JsonResult.okJsonResultWithData("成功！");
+    }
+
+    /**
+     * 我的文章
+     * @param response
+     * @param request
+     * @return
+     */
+    @GetMapping("api/article/myarticle")
+    public JsonResult<ArticleResp> myarticle(HttpServletResponse response, HttpServletRequest request){
+        return JsonResult.okJsonResultWithData(null);
+    }
+
+    /**
+     * 我的文章
+     * @param response
+     * @param request
+     * @return
+     */
+    @GetMapping("api/article/myfocus")
+    public JsonResult<ArticleResp> myfocus(HttpServletResponse response, HttpServletRequest request){
+        return JsonResult.okJsonResultWithData(null);
+    }
+
+    /**
+     * 我的草稿
+     * @param response
+     * @param request
+     * @return
+     */
+    @GetMapping("api/article/mydraft")
+    public JsonResult<ArticleResp> mydraft(HttpServletResponse response, HttpServletRequest request){
+        return JsonResult.okJsonResultWithData(null);
+    }
+
+    /**
+     * 我的收藏
+     * @param response
+     * @param request
+     * @return
+     */
+    @GetMapping("api/article/mycollect")
+    public JsonResult<ArticleResp> mycollect(HttpServletResponse response, HttpServletRequest request){
+        return JsonResult.okJsonResultWithData(null);
     }
 
 }

@@ -7,7 +7,7 @@
     <!--&lt;!&ndash; 引入外部文件 &ndash;&gt;-->
     <!--&lt;!&ndash; mysql 驱动 &ndash;&gt;-->
 
-    <classPathEntry location="d:\soft\mysql-connector-java-5.1.46-bin.jar"/>
+    <classPathEntry location="E:\资料\项目\实体工具\generator\mysql-connector-java-5.1.6-bin.jar"/>
 
     <context id="my" targetRuntime="MyBatis3">
         <commentGenerator>
@@ -45,12 +45,12 @@
 
         <!-- <table tableName="sys_star" domainObjectName="SysStar">
          </table>-->
-        <table schema="goodstock" tableName="article_detail" domainObjectName="ArticleDetail"
+        <table schema="goodstock" tableName="opinion" domainObjectName="Opinion"
                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
             <property name="useActualColumnNames" value="false"/>
         </table>
-
+<!--
         <table schema="goodstock" tableName="sys_star" domainObjectName="SysStar"
                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
@@ -99,7 +99,7 @@
                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
             <property name="useActualColumnNames" value="false"/>
-        </table>
+        </table>-->
 
         <!--     <table tableName="bs_attention_article" domainObjectName="bsAttentionArticle"
                     enableCountByExample="false" enableUpdateByExample="false"

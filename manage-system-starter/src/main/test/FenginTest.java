@@ -8,13 +8,10 @@
  **/
 
 import com.alibaba.fastjson.JSON;
-import com.wwmust.manage.system.config.redis.RedisKit;
-import com.wwmust.manage.system.config.redis.RedisKitWithSpringRedisTemplate;
-import com.wwmust.manage.system.config.response.JsonResult;
-import com.wwmust.manage.system.facade.resp.category.CategoryResp;
-import com.wwmust.manage.system.service.fengin.SensitiveFengin;
+import com.wwmust.manage.system.config.RedisKitWithSpringRedisTemplate;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +24,14 @@ import java.util.List;
  */
 public class FenginTest {
 
-/*    @Autowired
-    private RedisKit redisKit;
+
+    @Autowired
+    private RedisKitWithSpringRedisTemplate redisTemplate;
 
     @Test
     public void a(){
 
-      String aq =   redisKit.get("token");
-      System.out.println(aq);
-    }*/
+        Object o = redisTemplate.get("123");
+System.out.println(o);
+    }
 }

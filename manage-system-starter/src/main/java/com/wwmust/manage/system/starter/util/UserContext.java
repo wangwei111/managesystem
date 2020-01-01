@@ -8,8 +8,7 @@
  **/
 package com.wwmust.manage.system.starter.util;
 
-import com.wwmust.manage.system.config.redis.RedisKit;
-import com.wwmust.manage.system.config.redis.RedisKitWithSpringRedisTemplate;
+import com.wwmust.manage.system.config.RedisKitWithSpringRedisTemplate;
 import com.wwmust.manage.system.facade.UserFacade;
 import com.wwmust.manage.system.facade.resp.UserInfoResp;
 import org.apache.commons.lang3.StringUtils;
@@ -25,17 +24,16 @@ import java.util.Enumeration;
  * @author wangwei<wwfdqc@126.com>
  * @date 01/01/2020 15:40
  */
-public  class UserUtil {
-
+public   class UserContext {
 
     @Autowired
-    private static RedisKit redisKit;
+    private RedisKitWithSpringRedisTemplate redisKit;
 
     @Autowired
     private static UserFacade userFacade;
 
 
-    public static UserInfoResp getUser(HttpServletRequest request){
+    public  UserInfoResp getUser(HttpServletRequest request){
         Enumeration headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
             String key = (String) headerNames.nextElement();
@@ -49,12 +47,14 @@ public  class UserUtil {
         return null;
     }
 
-    public static String getUserId(HttpServletRequest request){
+    public  String getUserId(HttpServletRequest request){
         Enumeration headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
             String key = (String) headerNames.nextElement();
             if(key.equalsIgnoreCase("token")){
-                return redisKit.get(request.getHeader(key));
+                String header = request.getHeader(key);
+                String  userId = redisKit.get(header);
+                return  userId;
             }
         }
         return null;

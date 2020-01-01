@@ -6,9 +6,8 @@
  * Proprietary and Confidential.
  * ****************************************************
  **/
-package com.wwmust.manage.system.config.redis;
+package com.wwmust.manage.system.config;
 
-import sun.rmi.runtime.Log;
 
 import java.time.Duration;
 import java.util.List;

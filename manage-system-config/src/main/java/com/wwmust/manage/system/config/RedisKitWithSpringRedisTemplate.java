@@ -6,7 +6,7 @@
  * Proprietary and Confidential.
  * ****************************************************
  **/
-package com.wwmust.manage.system.config.redis;
+package com.wwmust.manage.system.config;
 
 
 import org.slf4j.Logger;
@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
  * @date 11/23/2019 1:03
  */
 @Component
-public class RedisKitWithSpringRedisTemplate implements  RedisKit {
+public class RedisKitWithSpringRedisTemplate implements RedisKit {
 
     private  static  final Logger log =  LoggerFactory.getLogger(RedisKitWithSpringRedisTemplate.class.getSimpleName());
 

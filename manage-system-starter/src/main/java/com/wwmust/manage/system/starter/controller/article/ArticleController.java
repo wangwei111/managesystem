@@ -18,8 +18,7 @@ import com.wwmust.manage.system.facade.resp.UserInfoResp;
 import com.wwmust.manage.system.facade.resp.article.ArticleDetailResp;
 import com.wwmust.manage.system.facade.resp.article.ArticleResp;
 import com.wwmust.manage.system.facade.resp.article.ArticleSkinStypeResp;
-import com.wwmust.manage.system.starter.util.UserUtil;
-import org.apache.commons.lang3.StringUtils;
+import com.wwmust.manage.system.starter.util.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,6 +42,7 @@ public class ArticleController {
 
     @Autowired
     private  UserFacade userFacade;
+
     /**
      * 获取皮肤
      * @return
@@ -89,7 +89,8 @@ public class ArticleController {
     @GetMapping("api/article/operat/{type}/{operatType}/{articleId}")
     public JsonResult operat(HttpServletResponse response, HttpServletRequest request,@PathVariable String type,
                              @PathVariable String  operatType,@PathVariable String articleId,@PathVariable String articleUserId){
-        String userId = UserUtil.getUserId(request);
+        UserContext userContext= new UserContext();
+        String userId = userContext.getUserId(request);
         articleFacade.operat(userId,type,operatType,articleId,articleUserId);
         return JsonResult.okJsonResultWithData("成功！");
     }
@@ -100,9 +101,10 @@ public class ArticleController {
      * @param request
      * @return
      */
-    @GetMapping("api/article/myarticle")
+    @PostMapping("api/article/myarticle")
     public JsonResult< PageInfo<ArticleResp> > myarticle(HttpServletResponse response, HttpServletRequest request,@RequestBody ArticleQueryParam param){
-        String userId = UserUtil.getUserId(request);
+        UserContext userContext= new UserContext();
+        String userId = userContext.getUserId(request);
         param.setUserId(userId);
         param.setType("2");
         PageInfo<ArticleResp> respPageInfo = articleFacade.getArticleByUserIdAndType(param);
@@ -115,9 +117,10 @@ public class ArticleController {
      * @param request
      * @return
      */
-    @GetMapping("api/article/myfocus")
+    @PostMapping("api/article/myfocus")
     public JsonResult<PageInfo<UserInfoResp> > myfocus(HttpServletResponse response, HttpServletRequest request,Integer pageNum, Integer pageSize){
-        String userId = UserUtil.getUserId(request);
+        UserContext userContext= new UserContext();
+        String userId = userContext.getUserId(request);
         PageInfo<UserInfoResp> respPageInfo=  userFacade.getMyFocusUser(userId,pageNum,pageSize);
         return JsonResult.okJsonResultWithData(respPageInfo);
     }
@@ -128,9 +131,10 @@ public class ArticleController {
      * @param request
      * @return
      */
-    @GetMapping("api/article/mydraft")
+    @PostMapping("api/article/mydraft")
     public JsonResult<   PageInfo<ArticleResp> > mydraft(HttpServletResponse response, HttpServletRequest request,@RequestBody ArticleQueryParam param){
-        String userId = UserUtil.getUserId(request);
+        UserContext userContext= new UserContext();
+        String userId = userContext.getUserId(request);
         param.setUserId(userId);
         param.setType("1");
         PageInfo<ArticleResp> respPageInfo = articleFacade.getArticleByUserIdAndType(param);
@@ -143,9 +147,10 @@ public class ArticleController {
      * @param request
      * @return
      */
-    @GetMapping("api/article/mycollect")
+    @PostMapping("api/article/mycollect")
     public JsonResult< PageInfo<ArticleResp>> mycollect(HttpServletResponse response, HttpServletRequest request,@RequestBody ArticleQueryParam param){
-        String userId = UserUtil.getUserId(request);
+        UserContext userContext= new UserContext();
+        String userId = userContext.getUserId(request);
         param.setUserId(userId);
         param.setType("0");
         PageInfo<ArticleResp> respPageInfo = articleFacade.getArticleByUserIdAndType(param);

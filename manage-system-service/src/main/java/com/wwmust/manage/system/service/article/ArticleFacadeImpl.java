@@ -165,10 +165,7 @@ public class ArticleFacadeImpl implements ArticleFacade {
 */
 
         List<Article> articles=  articleMapper.list(ariticleDto);
-        PageInfo<Article> pageInfo1 = new PageInfo<>(articles);
-
         List<ArticleResp> resps =  new ArrayList<>();
-
         StringBuffer sb  = new StringBuffer();
         if(!CollectionUtils.isEmpty(articles)){
             articles.forEach(article -> {

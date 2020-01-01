@@ -6,18 +6,13 @@
  * Proprietary and Confidential.
  * ****************************************************
  **/
-package com.wwmust.manage.system.config.redis;
+package com.wwmust.manage.system.config;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.awt.event.KeyEvent;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**

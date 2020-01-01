@@ -41,7 +41,7 @@
         <mysql.connector.java.version>6.0.4</mysql.connector.java.version>
         <mapper.spring.boot.starter.version>2.1.5</mapper.spring.boot.starter.version>
         <hibernate.validator.version>6.0.17.Final</hibernate.validator.version>
-        <pagehelper.version>5.1.7</pagehelper.version>
+        <pagehelper.version>4.1.3</pagehelper.version>
         <cglib.version>3.2.0</cglib.version>
         <common.io>2.4</common.io>
         <httpclient>4.5.2</httpclient>
@@ -90,10 +90,18 @@
             <artifactId>cglib</artifactId>
             <version>${cglib.version}</version>
         </dependency>
-        <dependency>
+    <!--    <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
             <version>${pagehelper.version}</version>
+
+        </dependency>-->
+        <dependency>
+
+            <groupId>com.github.pagehelper</groupId>
+
+            <artifactId>pagehelper</artifactId>
+            <version>4.2.0</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -168,11 +176,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>1.1.1</version>
         </dependency>
     </dependencies>
 

@@ -138,6 +138,11 @@
     </insert>
 
     <select id="chickUserName" resultMap="BaseResultMap">
-        SELECT * FROM user WHERE account =#{username} OR email =#{username} OR phone =#{username}
+        SELECT * FROM sys_user WHERE account =#{username} OR email =#{username} OR phone =#{username}
+    </select>
+    <select id="getMyFocusUser" resultMap="BaseResultMap">
+        SELECT b.* from user_focus a LEFT JOIN sys_user b
+        on a.user_id = b.user_id
+        where a.user_id =#{userId}
     </select>
 </mapper>

@@ -12,7 +12,6 @@
         <module>manage-system-compose</module>
         <module>manage-system-config</module>
         <module>manage-system-dao</module>
-        <module>manage-system-service</module>
         <module>manage-system-facade</module>
         <module>manage-system-model</module>
         <module>manage-system-dto</module>
@@ -170,7 +169,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.1.1</version>
+        </dependency>
     </dependencies>
 
     <build>

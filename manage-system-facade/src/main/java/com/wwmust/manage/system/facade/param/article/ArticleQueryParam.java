@@ -42,7 +42,26 @@ public class ArticleQueryParam {
     //文章标题
     private  String articleTitle;
 
+    private  String userId;
 
+    //文章类型
+    private String type;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getArticleTitle() {
         return articleTitle;

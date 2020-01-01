@@ -6,9 +6,11 @@
  * Proprietary and Confidential.
  * ****************************************************
  **/
-package com.wwmust.manage.system.service.user.impl;
+package com.wwmust.manage.system.service.user;
 
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wwmust.manage.system.common.exception.DataInvalidataException;
 import com.wwmust.manage.system.config.SnowflakeWorker;
 import com.wwmust.manage.system.config.redis.RedisKitWithSpringRedisTemplate;
@@ -25,6 +27,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.Cookie;
@@ -32,7 +35,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -41,7 +46,7 @@ import java.util.concurrent.TimeUnit;
  * @author wangwei<wwfdqc@126.com>
  * @date 11/17/2019 21:20
  */
-@Service("UserFacade")
+@Service
 public class UserFacadeImpl implements UserFacade {
     private  static  final Logger log =  LoggerFactory.getLogger(UserFacadeImpl.class.getSimpleName());
 
@@ -120,5 +125,37 @@ public class UserFacadeImpl implements UserFacade {
             throw   new DataInvalidataException("该账号已经被注册！");
         }
             return userInfoResp;
+    }
+
+    @Override
+    public UserInfoResp getUserInfoByUserId(String userId) {
+     //   userMpper.getUserInfoByUserId(userId);
+        return null;
+    }
+
+    @Override
+    public PageInfo<UserInfoResp> getMyFocusUser(String userId,Integer pageSize,Integer pageNum) {
+        if (StringUtils.isEmpty(userId)) {
+            return null;
+        }
+        if (pageSize== 0) {
+            pageSize =10;
+        }
+        if (pageNum== null) {
+            pageNum =0;
+        }
+        PageHelper.startPage(pageNum, pageSize);
+       List<SysUser> sysUsers= userMpper.getMyFocusUser(userId);
+       if(!CollectionUtils.isEmpty(sysUsers)){
+        List<UserInfoResp> userInfoResps = new ArrayList<>();
+        sysUsers.forEach(user->{
+            UserInfoResp userInfoResp = new UserInfoResp();
+            BeanUtils.copyProperties(user,userInfoResp);
+            userInfoResps.add(userInfoResp);
+        });
+           PageInfo<UserInfoResp> pageInfo = new PageInfo<>(userInfoResps, pageSize);
+           return  pageInfo;
+       }
+        return null;
     }
 }

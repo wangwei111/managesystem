@@ -27,4 +27,12 @@ public interface ArticleMapper {
     List<Article> list(@Param("article") ArticleDto articleDto);
 
     ArticleDetailDto detail(@Param("articleId") String articleId);
+
+    List<Article> getArticleByUserIdAndType(String userId,String type);
+
+    List<Article> getArticleByCollectUserId(@Param("userId")String userId);
+
+    List<Article> getDraftArticleByUserId(@Param("userId")String userId);
+
+    List<Article> gettArticleByUserId(@Param("userId")String userId);
 }

@@ -8,13 +8,18 @@
  **/
 package com.wwmust.manage.system.starter.controller.article;
 
+import com.github.pagehelper.PageInfo;
 import com.wwmust.manage.system.config.response.JsonResult;
 import com.wwmust.manage.system.facade.ArticleFacade;
+import com.wwmust.manage.system.facade.UserFacade;
 import com.wwmust.manage.system.facade.param.article.ArticleParam;
 import com.wwmust.manage.system.facade.param.article.ArticleQueryParam;
+import com.wwmust.manage.system.facade.resp.UserInfoResp;
 import com.wwmust.manage.system.facade.resp.article.ArticleDetailResp;
 import com.wwmust.manage.system.facade.resp.article.ArticleResp;
 import com.wwmust.manage.system.facade.resp.article.ArticleSkinStypeResp;
+import com.wwmust.manage.system.starter.util.UserUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +40,9 @@ public class ArticleController {
 
     @Autowired
     private ArticleFacade articleFacade;
+
+    @Autowired
+    private  UserFacade userFacade;
     /**
      * 获取皮肤
      * @return
@@ -58,8 +66,8 @@ public class ArticleController {
      *查询列表
      */
     @PostMapping("api/article/list")
-    public JsonResult<List<ArticleResp> > list(@RequestBody ArticleQueryParam param){
-        List<ArticleResp>  articleResp = articleFacade.list(param);
+    public JsonResult<PageInfo<ArticleResp>> list(@RequestBody ArticleQueryParam param){
+        PageInfo<ArticleResp> articleResp = articleFacade.list(param);
         return JsonResult.okJsonResultWithData( articleResp);
     }
 
@@ -76,11 +84,13 @@ public class ArticleController {
 
 
     /**
-     *查询详情
+     *点赞收藏关注
      */
-    @GetMapping("api/article/operat/{userId}/{type}/{articleId}")
-    public JsonResult operat(@PathVariable String userId,@PathVariable String type,@PathVariable String articleId){
-        articleFacade.operat(userId,type,articleId);
+    @GetMapping("api/article/operat/{type}/{operatType}/{articleId}")
+    public JsonResult operat(HttpServletResponse response, HttpServletRequest request,@PathVariable String type,
+                             @PathVariable String  operatType,@PathVariable String articleId,@PathVariable String articleUserId){
+        String userId = UserUtil.getUserId(request);
+        articleFacade.operat(userId,type,operatType,articleId,articleUserId);
         return JsonResult.okJsonResultWithData("成功！");
     }
 
@@ -91,19 +101,25 @@ public class ArticleController {
      * @return
      */
     @GetMapping("api/article/myarticle")
-    public JsonResult<ArticleResp> myarticle(HttpServletResponse response, HttpServletRequest request){
-        return JsonResult.okJsonResultWithData(null);
+    public JsonResult< PageInfo<ArticleResp> > myarticle(HttpServletResponse response, HttpServletRequest request,@RequestBody ArticleQueryParam param){
+        String userId = UserUtil.getUserId(request);
+        param.setUserId(userId);
+        param.setType("2");
+        PageInfo<ArticleResp> respPageInfo = articleFacade.getArticleByUserIdAndType(param);
+        return JsonResult.okJsonResultWithData(respPageInfo);
     }
 
     /**
-     * 我的文章
+     * 我的关注
      * @param response
      * @param request
      * @return
      */
     @GetMapping("api/article/myfocus")
-    public JsonResult<ArticleResp> myfocus(HttpServletResponse response, HttpServletRequest request){
-        return JsonResult.okJsonResultWithData(null);
+    public JsonResult<PageInfo<UserInfoResp> > myfocus(HttpServletResponse response, HttpServletRequest request,Integer pageNum, Integer pageSize){
+        String userId = UserUtil.getUserId(request);
+        PageInfo<UserInfoResp> respPageInfo=  userFacade.getMyFocusUser(userId,pageNum,pageSize);
+        return JsonResult.okJsonResultWithData(respPageInfo);
     }
 
     /**
@@ -113,8 +129,12 @@ public class ArticleController {
      * @return
      */
     @GetMapping("api/article/mydraft")
-    public JsonResult<ArticleResp> mydraft(HttpServletResponse response, HttpServletRequest request){
-        return JsonResult.okJsonResultWithData(null);
+    public JsonResult<   PageInfo<ArticleResp> > mydraft(HttpServletResponse response, HttpServletRequest request,@RequestBody ArticleQueryParam param){
+        String userId = UserUtil.getUserId(request);
+        param.setUserId(userId);
+        param.setType("1");
+        PageInfo<ArticleResp> respPageInfo = articleFacade.getArticleByUserIdAndType(param);
+        return JsonResult.okJsonResultWithData(respPageInfo);
     }
 
     /**
@@ -124,8 +144,12 @@ public class ArticleController {
      * @return
      */
     @GetMapping("api/article/mycollect")
-    public JsonResult<ArticleResp> mycollect(HttpServletResponse response, HttpServletRequest request){
-        return JsonResult.okJsonResultWithData(null);
+    public JsonResult< PageInfo<ArticleResp>> mycollect(HttpServletResponse response, HttpServletRequest request,@RequestBody ArticleQueryParam param){
+        String userId = UserUtil.getUserId(request);
+        param.setUserId(userId);
+        param.setType("0");
+        PageInfo<ArticleResp> respPageInfo = articleFacade.getArticleByUserIdAndType(param);
+        return JsonResult.okJsonResultWithData(respPageInfo);
     }
 
 }

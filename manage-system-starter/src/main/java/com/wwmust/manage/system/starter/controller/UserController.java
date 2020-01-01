@@ -13,7 +13,6 @@ import com.wwmust.manage.system.facade.UserFacade;
 import com.wwmust.manage.system.facade.param.LoginUserParam;
 import com.wwmust.manage.system.facade.param.RegisterUserParam;
 import com.wwmust.manage.system.facade.resp.UserInfoResp;
-import com.wwmust.manage.system.service.user.impl.UserFacadeImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

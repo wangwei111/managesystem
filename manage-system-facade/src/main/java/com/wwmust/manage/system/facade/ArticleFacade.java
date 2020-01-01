@@ -8,6 +8,7 @@
  **/
 package com.wwmust.manage.system.facade;
 
+import com.github.pagehelper.PageInfo;
 import com.wwmust.manage.system.facade.param.article.ArticleParam;
 import com.wwmust.manage.system.facade.param.article.ArticleQueryParam;
 import com.wwmust.manage.system.facade.resp.article.ArticleDetailResp;
@@ -41,7 +42,7 @@ public interface ArticleFacade {
      * @param param
      * @return
      */
-    List<ArticleResp>  list(ArticleQueryParam param);
+    PageInfo<ArticleResp> list(ArticleQueryParam param);
 
     /**
      * 根据文章的id获取文章详情
@@ -56,5 +57,12 @@ public interface ArticleFacade {
      * @param type
      * @param articleId
      */
-    void operat(String userId, String type, String articleId);
+    void operat(String userId, String type,String operatType, String articleId,String articleUserId);
+
+    /**
+     * 获取文章信息
+     * @param param
+     * @return
+     */
+    PageInfo<ArticleResp> getArticleByUserIdAndType(ArticleQueryParam param);
 }

@@ -8,6 +8,7 @@
  **/
 package com.wwmust.manage.system.facade;
 
+import com.github.pagehelper.PageInfo;
 import com.wwmust.manage.system.facade.param.LoginUserParam;
 import com.wwmust.manage.system.facade.param.RegisterUserParam;
 import com.wwmust.manage.system.facade.resp.AdminResp;
@@ -46,4 +47,19 @@ public interface UserFacade {
      * @return
      */
     UserInfoResp register(RegisterUserParam registerUserParam) throws UnsupportedEncodingException, NoSuchAlgorithmException;
+
+    /**
+     * 获取用户信息
+     * @param userId
+     * @return
+     */
+    UserInfoResp getUserInfoByUserId(String userId);
+
+
+    /**
+     * 获取关注用户信息
+     * @param userId
+     * @return
+     */
+    PageInfo<UserInfoResp> getMyFocusUser(String userId,Integer pageSize,Integer pageNum);
 }

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wwmust.manage.system.dao.AricleCollectMapper" >
+  <resultMap id="BaseResultMap" type="com.wwmust.manage.system.model.AricleCollect" >
+    <id column="aricle_collect_id" property="aricleCollectId" jdbcType="BIGINT" />
+    <result column="aricle_id" property="aricleId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="aricle_user_id" property="aricleUserId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="enable_flag" property="enableFlag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    aricle_collect_id, aricle_id, user_id, aricle_user_id, create_time, update_time, 
+    enable_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from aricle_collect
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from aricle_collect
+    where aricle_collect_id = #{aricleCollectId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.wwmust.manage.system.model.AricleCollect" >
+    insert into aricle_collect (aricle_collect_id, aricle_id, user_id, 
+      aricle_user_id, create_time, update_time, 
+      enable_flag)
+    values (#{aricleCollectId,jdbcType=BIGINT}, #{aricleId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{aricleUserId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{enableFlag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wwmust.manage.system.model.AricleCollect" >
+    insert into aricle_collect
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="aricleCollectId != null" >
+        aricle_collect_id,
+      </if>
+      <if test="aricleId != null" >
+        aricle_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="aricleUserId != null" >
+        aricle_user_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="enableFlag != null" >
+        enable_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="aricleCollectId != null" >
+        #{aricleCollectId,jdbcType=BIGINT},
+      </if>
+      <if test="aricleId != null" >
+        #{aricleId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="aricleUserId != null" >
+        #{aricleUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableFlag != null" >
+        #{enableFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wwmust.manage.system.model.AricleCollect" >
+    update aricle_collect
+    <set >
+      <if test="aricleId != null" >
+        aricle_id = #{aricleId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="aricleUserId != null" >
+        aricle_user_id = #{aricleUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableFlag != null" >
+        enable_flag = #{enableFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where aricle_collect_id = #{aricleCollectId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wwmust.manage.system.model.AricleCollect" >
+    update aricle_collect
+    set aricle_id = #{aricleId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      aricle_user_id = #{aricleUserId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      enable_flag = #{enableFlag,jdbcType=VARCHAR}
+    where aricle_collect_id = #{aricleCollectId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByArticleIdAndUserId" parameterType="string" resultType="boolean">
+        SELECT  count(1) FROM  aricle_collect
+          where user_id =#{userId}
+          and aricle_id =#{articleId}
+  </select>
+  <delete id="deleteByArticleIdAndUserId" parameterType="string">
+    delete from aricle_collect
+     where user_id =#{userId}
+          and aricle_id =#{articleId}
+  </delete>
+</mapper>

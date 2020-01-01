@@ -8,6 +8,8 @@
  **/
 
 import com.alibaba.fastjson.JSON;
+import com.wwmust.manage.system.config.redis.RedisKit;
+import com.wwmust.manage.system.config.redis.RedisKitWithSpringRedisTemplate;
 import com.wwmust.manage.system.config.response.JsonResult;
 import com.wwmust.manage.system.facade.resp.category.CategoryResp;
 import com.wwmust.manage.system.service.fengin.SensitiveFengin;
@@ -25,13 +27,13 @@ import java.util.List;
  */
 public class FenginTest {
 
+/*    @Autowired
+    private RedisKit redisKit;
+
     @Test
     public void a(){
-        List<CategoryResp> a = new ArrayList<>();
-        CategoryResp categoryResp = new CategoryResp();
-        categoryResp.setCategoryCode("ss");
-        categoryResp.setCategoryName("bb");
-        a.add(categoryResp);
-System.out.println(JSON.toJSONString(a));
-    }
+
+      String aq =   redisKit.get("token");
+      System.out.println(aq);
+    }*/
 }

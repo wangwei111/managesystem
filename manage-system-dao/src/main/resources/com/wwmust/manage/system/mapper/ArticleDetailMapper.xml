@@ -137,7 +137,7 @@
             attention_num = attention_num+1
         </if>
         <if test="type ==2">
-            /*转发数*/
+            /*收藏数*/
             collect_num = collect_num+1
         </if>
         <if test="type ==3">

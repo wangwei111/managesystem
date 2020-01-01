@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wwmust.manage.system.dao.UserFocusMapper" >
+  <resultMap id="BaseResultMap" type="com.wwmust.manage.system.model.UserFocus" >
+    <id column="user_focus_id" property="userFocusId" jdbcType="BIGINT" />
+    <result column="focus_user_id" property="focusUserId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="enable_flag" property="enableFlag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_focus_id, focus_user_id, user_id, create_time, update_time, enable_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_focus
+    where user_focus_id = #{userFocusId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_focus
+    where user_focus_id = #{userFocusId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.wwmust.manage.system.model.UserFocus" >
+    insert into user_focus (user_focus_id, focus_user_id, user_id, 
+      create_time, update_time, enable_flag
+      )
+    values (#{userFocusId,jdbcType=BIGINT}, #{focusUserId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{enableFlag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wwmust.manage.system.model.UserFocus" >
+    insert into user_focus
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userFocusId != null" >
+        user_focus_id,
+      </if>
+      <if test="focusUserId != null" >
+        focus_user_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="enableFlag != null" >
+        enable_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userFocusId != null" >
+        #{userFocusId,jdbcType=BIGINT},
+      </if>
+      <if test="focusUserId != null" >
+        #{focusUserId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableFlag != null" >
+        #{enableFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wwmust.manage.system.model.UserFocus" >
+    update user_focus
+    <set >
+      <if test="focusUserId != null" >
+        focus_user_id = #{focusUserId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enableFlag != null" >
+        enable_flag = #{enableFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_focus_id = #{userFocusId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wwmust.manage.system.model.UserFocus" >
+    update user_focus
+    set focus_user_id = #{focusUserId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      enable_flag = #{enableFlag,jdbcType=VARCHAR}
+    where user_focus_id = #{userFocusId,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByArticleUserIdAndUserId" parameterType="string" resultType="boolean">
+    SELECT  count(1) FROM  user_focus
+    where user_id =#{userId}
+    and focus_user_id =#{focusUserId}
+  </select>
+  <delete id="deleteByArticleUserIdAndUserId" parameterType="string">
+    delete from aricle_collect
+    where user_id =#{userId}
+    and focus_user_id =#{focusUserId}
+  </delete>
+</mapper>

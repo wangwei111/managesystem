@@ -7,8 +7,8 @@
  * ****************************************************
  **/
 package com.wwmust.manage.system.service.article;
-
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wwmust.manage.system.common.exception.DataInvalidataException;
 import com.wwmust.manage.system.common.exception.SystemException;
 import com.wwmust.manage.system.common.utils.DateUtil;
@@ -54,6 +54,13 @@ public class ArticleFacadeImpl implements ArticleFacade {
 
     @Autowired
     private ArticleDetailMapper articleDetailMapper;
+
+    @Autowired
+    private AricleCollectMapper aricleCollectMapper;
+
+    @Autowired
+    private UserFocusMapper userFocusMapper;
+
 
 
 
@@ -132,7 +139,7 @@ public class ArticleFacadeImpl implements ArticleFacade {
      * @return
      */
     @Override
-    public List<ArticleResp> list(ArticleQueryParam param) {
+    public PageInfo<ArticleResp> list(ArticleQueryParam param) {
         if( param.getPageSize() ==0){
            param.setPageSize(10);
         }
@@ -158,6 +165,8 @@ public class ArticleFacadeImpl implements ArticleFacade {
 */
 
         List<Article> articles=  articleMapper.list(ariticleDto);
+        PageInfo<Article> pageInfo1 = new PageInfo<>(articles);
+
         List<ArticleResp> resps =  new ArrayList<>();
 
         StringBuffer sb  = new StringBuffer();
@@ -170,6 +179,7 @@ public class ArticleFacadeImpl implements ArticleFacade {
         List<ArticleDetail> detailList = null;
         if(StringUtils.isEmpty(sb)){
             detailList =  articleDetailMapper.getArticleDeatilList(sb.toString());
+
         }
 
         if(!CollectionUtils.isEmpty(articles)){
@@ -205,7 +215,9 @@ public class ArticleFacadeImpl implements ArticleFacade {
                 resps.add(resp);
             });
         }
-        return resps;
+
+        PageInfo<ArticleResp> pageInfo = new PageInfo<>(resps);
+        return pageInfo ;
     }
 
     @Override
@@ -231,10 +243,42 @@ public class ArticleFacadeImpl implements ArticleFacade {
     }
 
     @Override
-    public void operat(String userId, String type, String articleId) {
+    public void operat(String userId, String type,String operatType, String articleId,String  articleUserId) {
         if(!StringUtils.isEmpty(userId)){
             if("1".equalsIgnoreCase(type)){
-                //关注 增加表关联
+                //关注
+                if(operatType.equalsIgnoreCase("Y")){
+                    //查询用户是否关注该文章
+                    if(userFocusMapper.selectByArticleUserIdAndUserId(userId,articleUserId)){
+                        return;
+                    }
+                    UserFocus userFocus = new UserFocus();
+                    userFocus.setFocusUserId(new Long(articleUserId));
+                    userFocus.setCreateTime(new Date());
+                    userFocus.setUpdateTime(new Date());
+                    userFocus.setUserId(new Long(userId));
+                    userFocusMapper.insertSelective(userFocus);
+                }else{
+                    userFocusMapper.deleteByArticleUserIdAndUserId(userId,articleUserId);
+                }
+            }else if("2".equalsIgnoreCase(type)){
+                //收藏
+                if(operatType.equalsIgnoreCase("Y")){
+                    //查询用户是否关注该文章
+                    if(aricleCollectMapper.selectByArticleIdAndUserId(userId,articleId)){
+                        return;
+                    }
+                    AricleCollect aricleCollect = new AricleCollect();
+                    aricleCollect.setAricleCollectId(SnowflakeWorker.generateId());
+                    aricleCollect.setAricleId(new Long(articleId));
+                    aricleCollect.setCreateTime(new Date());
+                    aricleCollect.setUpdateTime(new Date());
+                    aricleCollect.setAricleUserId(new Long(articleUserId));
+                    aricleCollect.setUserId(new Long(userId));
+                    aricleCollectMapper.insertSelective(aricleCollect);
+                }else{
+                    aricleCollectMapper.deleteByArticleIdAndUserId(userId,articleId);
+                }
             }
             articleDetailMapper.updateDetail(type,articleId);
         }else {
@@ -242,4 +286,37 @@ public class ArticleFacadeImpl implements ArticleFacade {
         }
     }
 
+    @Override
+    public PageInfo<ArticleResp> getArticleByUserIdAndType(ArticleQueryParam param) {
+        if (StringUtils.isEmpty(param.getUserId())) {
+            return null;
+        }
+        if (param.getPageSize() == 0) {
+            param.setPageSize(10);
+        }
+        PageHelper.startPage(param.getPageNum(), param.getPageSize());
+        List<Article> articles = null;
+        if (StringUtils.isEmpty(param.getType())) {
+            return null;
+        } else if (param.getType().equalsIgnoreCase("0")) {
+            //我的收藏
+             articles = articleMapper.getArticleByCollectUserId(param.getUserId());
+        }else if(param.getType().equalsIgnoreCase("1")){
+            //我的草稿
+             articles = articleMapper.getDraftArticleByUserId(param.getUserId());
+        }else if(param.getType().equals("2")){
+            //我的文章
+            articles = articleMapper.gettArticleByUserId(param.getUserId());
+        }
+        List<ArticleResp> articleResps = new ArrayList<>();
+        if(articles != null){
+            articles.forEach(article -> {
+                ArticleResp articleResp = new ArticleResp();
+                BeanUtils.copyProperties(article,articleResp);
+                articleResps.add(articleResp);
+            });
+        }
+        PageInfo<ArticleResp> pageInfo = new PageInfo<>(articleResps);
+        return pageInfo;
+    }
 }

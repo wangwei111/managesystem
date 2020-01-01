@@ -9,14 +9,11 @@ spring:
 pagehelper:
     helper-dialect: mysql
     params: count=countSql
-    reasonable: true
-    row-bounds-with-count: true
+    reasonable: false
     support-methods-arguments: true
 mybatis:
   type-aliases-package: com.wwmust.manage.system.model
   mapper-locations: classpath*:com/wwmust/manage/system/mapper/*.xml
-
-
 login:
     interceptor:
           register: true

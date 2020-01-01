@@ -371,14 +371,34 @@
     <select id="detail" resultMap="ArticleDetailResultMap">
         SELECT
          a.article_id, a.category_id, a.skin_id, a.create_user, a.create_time, a.update_time,
-        a.topic_id,  a.is_hot, a.is_sensitive,  a.is_public, a.is_draft,
-        a.article_title, a.source, a.is_audit,a.article_content,a.source,
-        b.article_detail_id as articleDetailId, b.approval_num as approvalNum, b.oppose_num as opposeNum, b.collect_num as collectNum,
+         a.topic_id,  a.is_hot, a.is_sensitive,  a.is_public, a.is_draft,
+         a.article_title, a.source, a.is_audit,a.article_content,a.source,
+         b.article_detail_id as articleDetailId, b.approval_num as approvalNum, b.oppose_num as opposeNum, b.collect_num as collectNum,
          b.view_num as viewNum, b.attention_num as attentionNum,
         c.nickname as nickName ,c.user_img as userImgUrl FROM article  a
         LEFT JOIN article_detail b on a.article_id = b.article_id
         LEFT JOIN sys_user c on a.create_user = c.user_id
         where a.article_id =#{articleId}
     </select>
+
+    <select id="getArticleByCollectUserId" resultMap="ArticleResultMap">
+        select  b.article_id,          b.article_title, b.source ,b.category_id, b.skin_id, b.create_user from aricle_collect a
+                LEFT JOIN
+               article  b
+        on a.user_id =#{userId}
+    </select>
+
+    <select id="getDraftArticleByUserId">
+          select  b.article_id,          b.article_title, b.source ,b.category_id, b.skin_id, b.create_user ，
+         b.create_time, b.update_time from article b
+        where  b.create_user =#{userId} and b.is_draft="Y"
+    </select>
+    <select id="gettArticleByUserId">
+        select  b.article_id,          b.article_title, b.source ,b.category_id, b.skin_id, b.create_user ，
+         b.create_time, b.update_time
+        from article b
+        where  b.create_user =#{userId}
+    </select>
+
 
 </mapper>

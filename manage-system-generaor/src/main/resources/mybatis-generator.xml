@@ -45,7 +45,12 @@
 
         <!-- <table tableName="sys_star" domainObjectName="SysStar">
          </table>-->
-        <table schema="goodstock" tableName="opinion" domainObjectName="Opinion"
+  <!--      <table schema="goodstock" tableName="user_focus" domainObjectName="UserFocus"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+        </table>-->
+        <table schema="goodstock" tableName="aricle_collect" domainObjectName="AricleCollect"
                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
             <property name="useActualColumnNames" value="false"/>

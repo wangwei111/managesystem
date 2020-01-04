@@ -7,14 +7,12 @@
  * ****************************************************
  **/
 
-import com.alibaba.fastjson.JSON;
-import com.wwmust.manage.system.config.RedisKitWithSpringRedisTemplate;
+import com.wwmust.manage.system.service.config.RedisKit;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.context.ApplicationContext;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.annotation.Resource;
 
 /**
  * ${DESCRIPTION}
@@ -25,13 +23,17 @@ import java.util.List;
 public class FenginTest {
 
 
+    @Resource
+    private RedisKit redisTemplate;
+
     @Autowired
-    private RedisKitWithSpringRedisTemplate redisTemplate;
+    private ApplicationContext context;
 
     @Test
     public void a(){
-
-        Object o = redisTemplate.get("123");
-System.out.println(o);
+        String[] beanDefinitionNames = context.getBeanDefinitionNames();
+        for(int i=0;i<beanDefinitionNames.length;i++){
+            System.out.println(beanDefinitionNames[i]);
+        }
     }
 }

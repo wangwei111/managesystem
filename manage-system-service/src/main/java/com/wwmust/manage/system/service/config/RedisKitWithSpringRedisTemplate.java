@@ -5,39 +5,44 @@
  * Unauthorized copy of this file, via any medium is strictly prohibited.
  * Proprietary and Confidential.
  * ****************************************************
- **/
-package com.wwmust.manage.system.config;
+ **//*
+
+package com.wwmust.manage.system.service.config;
 
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
 import java.io.Serializable;
 import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+*/
 /**
  * ${DESCRIPTION}
  *
  * @author wangwei<wwfdqc@126.com>
  * @date 11/23/2019 1:03
- */
-@Component
+ *//*
+
+@Service
 public class RedisKitWithSpringRedisTemplate implements RedisKit {
 
     private  static  final Logger log =  LoggerFactory.getLogger(RedisKitWithSpringRedisTemplate.class.getSimpleName());
 
     private  static  final  String ERROR_REDIS ="Redis Execute setIfAbsent Error.Params[{},{}]";
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
 
-    public  RedisKitWithSpringRedisTemplate(){}
+    public  RedisKitWithSpringRedisTemplate(){
+    }
 
     public RedisKitWithSpringRedisTemplate(RedisTemplate redisTemplate){
         this.redisTemplate =redisTemplate;
@@ -281,11 +286,13 @@ public class RedisKitWithSpringRedisTemplate implements RedisKit {
         return remove(handleKey("LCK:"+lockKey));
     }
 
-    /**
+    */
+/**
      * 处理key添加前缀
      * @param originKey
      * @return
-     */
+     *//*
+
     @Override
     public String handleKey(String originKey) {
         String handledKey;
@@ -303,3 +310,4 @@ public class RedisKitWithSpringRedisTemplate implements RedisKit {
         return handledKey;
     }
 }
+*/

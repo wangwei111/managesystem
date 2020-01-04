@@ -18,7 +18,7 @@ import java.math.BigDecimal;
  */
 public class ArticleResp{
 
-    private Long articleId;
+    private String articleId;
 
     private Long categoryId;
 
@@ -237,11 +237,11 @@ public class ArticleResp{
         this.latitude = latitude;
     }
 
-    public Long getArticleId() {
+    public String getArticleId() {
         return articleId;
     }
 
-    public void setArticleId(Long articleId) {
+    public void setArticleId(String articleId) {
         this.articleId = articleId;
     }
 

@@ -13,7 +13,7 @@
         <result column="region" property="region" jdbcType="VARCHAR"/>
         <result column="longitude" property="longitude" jdbcType="DECIMAL"/>
         <result column="latitude" property="latitude" jdbcType="DECIMAL"/>
-        <result column="enable_flag" property="enableFlag" jdbcType="TINYINT"/>
+        <result column="enable_flag" property="enableFlag" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
         <result column="user_img" property="userImg" jdbcType="VARCHAR"/>
@@ -29,7 +29,7 @@
         values (#{userId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR},
         #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
         #{email,jdbcType=VARCHAR}, #{wxId,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR},
-        #{longitude,jdbcType=DECIMAL}, #{latitude,jdbcType=DECIMAL}, #{enableFlag,jdbcType=TINYINT},
+        #{longitude,jdbcType=DECIMAL}, #{latitude,jdbcType=DECIMAL}, #{enableFlag,jdbcType=VARCHAR},
         #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{userImg,jdbcType=VARCHAR},
         #{selfIntroduction,jdbcType=VARCHAR})
     </insert>
@@ -120,7 +120,7 @@
                 #{latitude,jdbcType=DECIMAL},
             </if>
             <if test="enableFlag != null">
-                #{enableFlag,jdbcType=TINYINT},
+                #{enableFlag,jdbcType=VARCHAR},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
@@ -138,11 +138,18 @@
     </insert>
 
     <select id="chickUserName" resultMap="BaseResultMap">
-        SELECT * FROM sys_user WHERE account =#{username} OR email =#{username} OR phone =#{username}
+        SELECT * FROM sys_user WHERE account =#{username} OR email =#{username
+        } OR phone =#{username}
     </select>
     <select id="getMyFocusUser" resultMap="BaseResultMap">
         SELECT b.* from user_focus a LEFT JOIN sys_user b
         on a.user_id = b.user_id
         where a.user_id =#{userId}
     </select>
+
+    <select id="getUserInfo" resultMap="BaseResultMap">
+        SELECT a.* from sys_user a
+        where a.user_id =#{userId} and  enable_flag ='Y'
+    </select>
+
 </mapper>

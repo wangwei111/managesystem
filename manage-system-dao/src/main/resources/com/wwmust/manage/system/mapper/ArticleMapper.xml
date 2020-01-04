@@ -362,10 +362,7 @@
         <if test='article.isHot== 1'>
             and a.is_hot=1
         </if>
-        <if test='article.isNew ==1'>
             order by a.update_time desc
-        </if>
-
     </select>
 
     <select id="detail" resultMap="ArticleDetailResultMap">
@@ -382,22 +379,23 @@
     </select>
 
     <select id="getArticleByCollectUserId" resultMap="ArticleResultMap">
-        select  b.article_id,          b.article_title, b.source ,b.category_id, b.skin_id, b.create_user from aricle_collect a
+        select  b.article_id,          b.article_title, b.source ,b.category_id, b.skin_id, b.create_user,  a.create_time, a.update_time  from article_collect a
                 LEFT JOIN
-               article  b
-        on a.user_id =#{userId}
+               article  b  on a.article_id = b.article_id
+        where  a.user_id =#{userId}  order by a.update_time DESC
     </select>
 
-    <select id="getDraftArticleByUserId">
-          select  b.article_id,          b.article_title, b.source ,b.category_id, b.skin_id, b.create_user ，
+    <select id="getDraftArticleByUserId" resultMap="ArticleResultMap">
+          select  b.article_id,          b.article_title, b.source ,b.category_id, b.skin_id, b.create_user ,
          b.create_time, b.update_time from article b
-        where  b.create_user =#{userId} and b.is_draft="Y"
+        where  b.create_user =#{userId} and b.is_draft="Y" order by update_time DESC
     </select>
-    <select id="gettArticleByUserId">
-        select  b.article_id,          b.article_title, b.source ,b.category_id, b.skin_id, b.create_user ，
+    <select id="gettArticleByUserId" resultMap="ArticleResultMap">
+        select  b.article_id,
+          b.article_title, b.source ,b.category_id, b.skin_id, b.create_user ,
          b.create_time, b.update_time
         from article b
-        where  b.create_user =#{userId}
+        where  b.create_user =#{userId} order by update_time DESC
     </select>
 
 

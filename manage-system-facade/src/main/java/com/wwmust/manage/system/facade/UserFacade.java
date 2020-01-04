@@ -35,11 +35,9 @@ public interface UserFacade {
 
     /**
      * 根据token查询用户信息
-     * @param response
-     * @param request
      * @return
      */
-    UserInfoResp getUserInfo(HttpServletResponse response, HttpServletRequest request);
+    UserInfoResp getUserInfo(String userId);
 
     /**
      * 注册用户信息

@@ -45,6 +45,15 @@ public class ArticleParam {
 
     //文章标题
     private  String articleTitle;
+    private String articleContent;
+
+    public String getArticleContent() {
+        return articleContent;
+    }
+
+    public void setArticleContent(String articleContent) {
+        this.articleContent = articleContent;
+    }
 
     public String getArticleTitle() {
         return articleTitle;

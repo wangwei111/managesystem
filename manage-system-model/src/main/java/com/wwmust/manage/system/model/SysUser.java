@@ -26,7 +26,7 @@ public class SysUser {
 
     private BigDecimal latitude;
 
-    private Byte enableFlag;
+    private String enableFlag;
 
     private Date createTime;
 
@@ -35,6 +35,7 @@ public class SysUser {
     private String userImg;
 
     private String selfIntroduction;
+
 
     public Long getUserId() {
         return userId;
@@ -124,11 +125,11 @@ public class SysUser {
         this.latitude = latitude;
     }
 
-    public Byte getEnableFlag() {
+    public String getEnableFlag() {
         return enableFlag;
     }
 
-    public void setEnableFlag(Byte enableFlag) {
+    public void setEnableFlag(String enableFlag) {
         this.enableFlag = enableFlag;
     }
 

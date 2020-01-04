@@ -8,6 +8,7 @@
  **/
 package com.wwmust.manage.system.starter.controller.article;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.wwmust.manage.system.config.response.JsonResult;
 import com.wwmust.manage.system.facade.ArticleFacade;
@@ -20,6 +21,7 @@ import com.wwmust.manage.system.facade.resp.article.ArticleResp;
 import com.wwmust.manage.system.facade.resp.article.ArticleSkinStypeResp;
 import com.wwmust.manage.system.starter.util.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,7 +59,14 @@ public class ArticleController {
      * 暂存及保存
      */
     @PostMapping("api/article/save")
-    public JsonResult<Map<String,Long>> save(ArticleParam param){
+    public JsonResult<?> save(ArticleParam param,HttpServletResponse response, HttpServletRequest request){
+        UserContext userContext= new UserContext();
+        String userId = userContext.getUserId(request);
+        if (StringUtils.isEmpty(userId)) {
+            return JsonResult.okJsonResultWithData("用户为空！");
+        }else {
+            param.setCreateUser(userId);
+        }
         Map<String,Long> articleId  = articleFacade.save(param);
         return JsonResult.okJsonResultWithData( articleId);
     }
@@ -67,8 +76,7 @@ public class ArticleController {
      */
     @PostMapping("api/article/list")
     public JsonResult<PageInfo<ArticleResp>> list(@RequestBody ArticleQueryParam param){
-        PageInfo<ArticleResp> articleResp = articleFacade.list(param);
-        return JsonResult.okJsonResultWithData( articleResp);
+        return JsonResult.okJsonResultWithData( articleFacade.list(param));
     }
 
 
@@ -119,7 +127,7 @@ public class ArticleController {
      */
     @PostMapping("api/article/myfocus")
     public JsonResult<PageInfo<UserInfoResp> > myfocus(HttpServletResponse response, HttpServletRequest request,Integer pageNum, Integer pageSize){
-        UserContext userContext= new UserContext();
+        UserContext userContext = new  UserContext();
         String userId = userContext.getUserId(request);
         PageInfo<UserInfoResp> respPageInfo=  userFacade.getMyFocusUser(userId,pageNum,pageSize);
         return JsonResult.okJsonResultWithData(respPageInfo);

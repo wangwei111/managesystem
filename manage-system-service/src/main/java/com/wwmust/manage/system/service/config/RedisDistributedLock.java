@@ -6,7 +6,7 @@
  * Proprietary and Confidential.
  * ****************************************************
  **/
-package com.wwmust.manage.system.config;
+package com.wwmust.manage.system.service.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,7 +62,6 @@ public class RedisDistributedLock {
                         log.debug("add RedisDistributedLock["+key+"].");
                     }
                     success= true;
-                    break;
                 }
                 TimeUnit.SECONDS.sleep(3);
             }

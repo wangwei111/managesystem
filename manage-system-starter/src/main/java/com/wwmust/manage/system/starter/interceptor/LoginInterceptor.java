@@ -8,7 +8,7 @@
  **/
 package com.wwmust.manage.system.starter.interceptor;
 
-import com.wwmust.manage.system.config.RedisKitWithSpringRedisTemplate;
+import com.wwmust.manage.system.service.config.RedisKit;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,8 +34,8 @@ public class LoginInterceptor implements HandlerInterceptor  {
 
     private  static  final Logger log =  LoggerFactory.getLogger(LoginInterceptor.class.getSimpleName());
 
-    @Autowired
-    private RedisKitWithSpringRedisTemplate redisKitWithSpringRedisTemplate;
+    @Resource
+    private RedisKit redisKit;
 
     private static final String SIGN= "sign";
     private static final String TIMESTAMP ="timestamp";
@@ -49,14 +50,14 @@ public class LoginInterceptor implements HandlerInterceptor  {
             if("token".equalsIgnoreCase(cookie.getName())){
                 String value = cookie.getValue();
                 if(StringUtils.isNotEmpty(value)){
-                    Object obj = redisKitWithSpringRedisTemplate.get(value);
+                    Object obj = redisKit.get(value);
                     if(obj ==null){
                         //token无效请重新登录
                         request.getRequestDispatcher("/user/login").forward(request, response);
                         return false;
                     }else{
                         //更新token时间
-                        redisKitWithSpringRedisTemplate.set(value,obj,30L, TimeUnit.MINUTES);
+                        redisKit.set(value,obj,30L, TimeUnit.MINUTES);
                         return  true;
                     }
                 }

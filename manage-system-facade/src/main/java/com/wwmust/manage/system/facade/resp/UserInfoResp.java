@@ -28,6 +28,18 @@ public class UserInfoResp {
     private String school;
     private String eductionBackgroud;
     private String token;
+    private String introduce;
+    private int artilceNum;
+    private int draftNum;
+
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
+    }
 
     public String getUsername() {
         return username;

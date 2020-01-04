@@ -174,7 +174,7 @@ public class ArticleFacadeImpl implements ArticleFacade {
         }
 
         List<ArticleDetail> detailList = null;
-        if(StringUtils.isEmpty(sb)){
+        if(!StringUtils.isEmpty(sb)){
             detailList =  articleDetailMapper.getArticleDeatilList(sb.toString());
 
         }
@@ -189,6 +189,7 @@ public class ArticleFacadeImpl implements ArticleFacade {
                 resp.setUserId(article.getCreateUser());
                 resp.setUserImgUrl(article.getUserImgUrl());
                 resp.setUserName(article.getNickName());
+                resp.setArticleId(article.getArticleId().toString());
                 if (finalDetailList != null) {
                     finalDetailList.forEach(detail -> {
                         if (detail.getArticleId().equals(article.getArticleId())) {
@@ -310,6 +311,7 @@ public class ArticleFacadeImpl implements ArticleFacade {
             articles.forEach(article -> {
                 ArticleResp articleResp = new ArticleResp();
                 BeanUtils.copyProperties(article,articleResp);
+                articleResp.setTime(DateUtil.format( article.getCreateTime(),"yyyy-MM-dd hh:mm"));
                 articleResps.add(articleResp);
             });
         }

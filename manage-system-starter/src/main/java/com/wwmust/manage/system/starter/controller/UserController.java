@@ -13,9 +13,11 @@ import com.wwmust.manage.system.facade.UserFacade;
 import com.wwmust.manage.system.facade.param.LoginUserParam;
 import com.wwmust.manage.system.facade.param.RegisterUserParam;
 import com.wwmust.manage.system.facade.resp.UserInfoResp;
+import com.wwmust.manage.system.starter.util.UserContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -78,16 +80,20 @@ public class UserController {
      * 查询用户信息
      * @return
      */
-    @PostMapping("/api/system/user/getUserInfo")
+    @GetMapping("/api/user/userinfo")
     public JsonResult getUserInfo(HttpServletResponse response, HttpServletRequest request){
         try{
-            UserInfoResp userInfoResp = userFacade.getUserInfo(response,request);
+            UserContext userContext = new  UserContext();
+            String userId = userContext.getUserId(request);
+            UserInfoResp userInfoResp = userFacade.getUserInfo(userId);
             return JsonResult.okJsonResultWithData(userInfoResp);
         }catch (Exception e){
             log.error("api/system/user/getUserInfo:error：{}"+e);
             return  JsonResult.failJsonResult(e.getMessage());
         }
     }
+
+
 
 
 }

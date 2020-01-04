@@ -12,7 +12,6 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wwmust.manage.system.common.exception.DataInvalidataException;
-import com.wwmust.manage.system.config.RedisKitWithSpringRedisTemplate;
 import com.wwmust.manage.system.config.SnowflakeWorker;
 import com.wwmust.manage.system.dao.SysUserMapper;
 import com.wwmust.manage.system.facade.UserFacade;
@@ -20,6 +19,7 @@ import com.wwmust.manage.system.facade.param.LoginUserParam;
 import com.wwmust.manage.system.facade.param.RegisterUserParam;
 import com.wwmust.manage.system.facade.resp.UserInfoResp;
 import com.wwmust.manage.system.model.SysUser;
+import com.wwmust.manage.system.service.config.RedisKit;
 import com.wwmust.manage.system.service.units.Md5Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +55,7 @@ public class UserFacadeImpl implements UserFacade {
 
 
     @Autowired
-    private RedisKitWithSpringRedisTemplate redisKitWithSpringRedisTemplate;
+    private RedisKit redisKit;
 
 
 
@@ -75,7 +75,7 @@ public class UserFacadeImpl implements UserFacade {
                 //生成token
                 String token = user.getAccount() + loginUserParam.getPassword() + System.currentTimeMillis();
                 //存在redis中
-                redisKitWithSpringRedisTemplate.setIfAbsent(Md5Util.EncoderByMd5(token),user,30, TimeUnit.MINUTES);
+                redisKit.setIfAbsent(Md5Util.EncoderByMd5(token),user,30, TimeUnit.MINUTES);
                 userInfoResp.setToken(Md5Util.EncoderByMd5(token));
                 BeanUtils.copyProperties(user,userInfoResp);
             }else{
@@ -88,14 +88,16 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public UserInfoResp getUserInfo(HttpServletResponse response, HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        for(Cookie cookie :cookies){
-            if(cookie.getName().equalsIgnoreCase("token")){
-                String value = cookie.getValue();
-                UserInfoResp userInfoResp = redisKitWithSpringRedisTemplate.get(value);
-                return userInfoResp;
-            }
+    public UserInfoResp getUserInfo(String userId) {
+        SysUser sysUser =   userMpper.getUserInfo(userId);
+        if(sysUser != null ){
+            UserInfoResp userInfoResp = new UserInfoResp();
+            BeanUtils.copyProperties(sysUser,userInfoResp);
+            userInfoResp.setUid(sysUser.getUserId());
+            userInfoResp.setImgUrl(sysUser.getUserImg());
+            userInfoResp.setUsername(sysUser.getNickname());
+            userInfoResp.setIntroduce(sysUser.getSelfIntroduction());
+            return   userInfoResp;
         }
         return null;
     }
@@ -138,10 +140,10 @@ public class UserFacadeImpl implements UserFacade {
         if (StringUtils.isEmpty(userId)) {
             return null;
         }
-        if (pageSize== 0) {
+        if (pageSize ==null ||pageSize== 0) {
             pageSize =10;
         }
-        if (pageNum== null) {
+        if (pageNum== null ) {
             pageNum =0;
         }
         PageHelper.startPage(pageNum, pageSize);
@@ -151,11 +153,15 @@ public class UserFacadeImpl implements UserFacade {
         sysUsers.forEach(user->{
             UserInfoResp userInfoResp = new UserInfoResp();
             BeanUtils.copyProperties(user,userInfoResp);
+            userInfoResp.setUsername(user.getNickname());
+            userInfoResp.setImgUrl(user.getUserImg());
+            userInfoResp.setUid(user.getUserId());
+            userInfoResp.setIntroduce(user.getSelfIntroduction());
             userInfoResps.add(userInfoResp);
         });
-           PageInfo<UserInfoResp> pageInfo = new PageInfo<>(userInfoResps, pageSize);
+           PageInfo<UserInfoResp> pageInfo = new PageInfo<>(userInfoResps);
            return  pageInfo;
        }
-        return null;
+      return new PageInfo<>(null);
     }
 }

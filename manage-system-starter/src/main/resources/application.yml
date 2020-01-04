@@ -6,6 +6,12 @@ spring:
         name: manage-system
     profiles:
         active: dev
+    redis:
+      port: 6379
+      jedis:
+        pool:
+          max-active: 8
+      host: localhost
 pagehelper:
     helper-dialect: mysql
     params: count=countSql
@@ -26,8 +32,3 @@ logging:
     org.hibernate: ERROR
   pattern:
     console: '%clr(%d{HH:mm:ss}){yellow} [%clr(%thread){red}] %-5level --- %clr(%logger){green} | %msg%n'
-#redis
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    timeout: 3000

@@ -17,4 +17,6 @@ public interface SysUserMapper {
 
 
     List<SysUser> getMyFocusUser(@Param("userId") String userId);
+
+    SysUser getUserInfo(@Param("userId") String userId);
 }

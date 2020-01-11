@@ -75,8 +75,8 @@ public class UserFacadeImpl implements UserFacade {
                 //生成token
                 String token = user.getAccount() + loginUserParam.getPassword() + System.currentTimeMillis();
                 //存在redis中
-                redisKit.setIfAbsent(Md5Util.EncoderByMd5(token),user,30, TimeUnit.MINUTES);
-                userInfoResp.setToken(Md5Util.EncoderByMd5(token));
+                redisKit.set(token,user.getUserId().toString(),30000L,TimeUnit.MINUTES);
+                userInfoResp.setToken(token);
                 BeanUtils.copyProperties(user,userInfoResp);
             }else{
                 throw    new DataInvalidataException("你输入的密码错误,请从新输入！");

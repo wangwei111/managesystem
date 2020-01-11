@@ -52,11 +52,11 @@ public class UserController {
     public JsonResult userLogin(@RequestBody  LoginUserParam loginUserParam,HttpServletResponse response, HttpServletRequest request){
         try{
             UserInfoResp userInfoResp = userFacade.userLogin(loginUserParam);
-            if(userInfoResp !=null){
+          /*  if(userInfoResp !=null){
                 Cookie cookie=new Cookie("token", userInfoResp.getToken());
                 cookie.setMaxAge(30000); //存活期为30分钟
                 response.addCookie(cookie);
-            }
+            }*/
             return JsonResult.okJsonResultWithData(userInfoResp);
         }catch (Exception e){
             log.error("api/system/user/login:error:{}"+e);

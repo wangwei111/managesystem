@@ -53,8 +53,9 @@ public class LoginInterceptor implements HandlerInterceptor  {
                     Object obj = redisKit.get(value);
                     if(obj ==null){
                         //token无效请重新登录
-                        request.getRequestDispatcher("/user/login").forward(request, response);
-                        return false;
+                   //     request.getRequestDispatcher("/user/login").forward(request, response);
+                    //    return false;
+                        return  true;
                     }else{
                         //更新token时间
                         redisKit.set(value,obj,30L, TimeUnit.MINUTES);

@@ -61,7 +61,6 @@ public class UserContext {
                     BeanFactory factory = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
                     redisKit =  (RedisKit) factory.getBean("redisKit");
                 }
-              //  redisKit.set("123","1");
                 String  userId = redisKit.get(header);
                 return  userId;
             }

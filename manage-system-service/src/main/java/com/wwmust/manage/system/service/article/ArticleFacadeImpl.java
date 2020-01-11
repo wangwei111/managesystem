@@ -116,6 +116,7 @@ public class ArticleFacadeImpl implements ArticleFacade {
             //新增操作
             article.setCreateTime(new Date());
             article.setUpdateTime(new Date());
+            article.setArticleContent(param.getArticleContent());
             Long articleId = SnowflakeWorker.generateId();
             article.setArticleId(articleId);
             map.put("articleId",articleId);

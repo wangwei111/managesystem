@@ -59,7 +59,7 @@ public class ArticleController {
      * 暂存及保存
      */
     @PostMapping("api/article/save")
-    public JsonResult<?> save(ArticleParam param,HttpServletResponse response, HttpServletRequest request){
+    public JsonResult<?> save(@RequestBody  ArticleParam param,HttpServletResponse response, HttpServletRequest request){
         UserContext userContext= new UserContext();
         String userId = userContext.getUserId(request);
         if (StringUtils.isEmpty(userId)) {

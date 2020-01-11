@@ -359,10 +359,10 @@
         <if test="article.categoryId !=null  and article.categoryId !='200' and article.categoryId != '300'">
             and a.category_id = #{article.categoryId}
         </if>
-        <if test='article.isHot== 1'>
+        <if test='article.isHot !=null and article.isHot== 1'>
             and a.is_hot=1
         </if>
-            order by a.update_time desc
+        order by a.update_time ,a.is_hot desc
     </select>
 
     <select id="detail" resultMap="ArticleDetailResultMap">

@@ -60,4 +60,13 @@ public interface UserFacade {
      * @return
      */
     PageInfo<UserInfoResp> getMyFocusUser(String userId,Integer pageSize,Integer pageNum);
+
+    /**
+     * 根据手机号和验证码 验证登陆
+     *
+     * @param phone
+     * @param authcode
+     * @return
+     */
+    UserInfoResp loginauthcode(String phone, String authcode);
 }

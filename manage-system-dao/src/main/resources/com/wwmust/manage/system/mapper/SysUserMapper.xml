@@ -141,6 +141,10 @@
         SELECT * FROM sys_user WHERE account =#{username} OR email =#{username
         } OR phone =#{username}
     </select>
+
+    <update id="updatePasswordByUid">
+        UPDATE sys_user set password =#{password} where user_id =#{userId}
+    </update>
     <select id="getMyFocusUser" resultMap="BaseResultMap">
         SELECT b.* from user_focus a LEFT JOIN sys_user b
         on a.user_id = b.user_id

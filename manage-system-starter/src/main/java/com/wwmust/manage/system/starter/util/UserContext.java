@@ -27,16 +27,17 @@ import java.util.Enumeration;
  * @author wangwei<wwfdqc@126.com>
  * @date 01/01/2020 15:40
  */
-public   class UserContext {
+public class UserContext {
+
 
     @Autowired
-    private RedisKit redisKit;
+    private static RedisKit redisKit;
 
     @Autowired
     private static UserFacade userFacade;
 
 
-    public  UserInfoResp getUser(HttpServletRequest request){
+    public UserInfoResp getUser(HttpServletRequest request) {
         Enumeration headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
             String key = (String) headerNames.nextElement();
@@ -50,7 +51,7 @@ public   class UserContext {
         return null;
     }
 
-    public String getUserId(HttpServletRequest request){
+    public static String getUserId(HttpServletRequest request) {
         Enumeration headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
             String key = (String) headerNames.nextElement();
@@ -60,7 +61,6 @@ public   class UserContext {
                     BeanFactory factory = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
                     redisKit =  (RedisKit) factory.getBean("redisKit");
                 }
-              //  redisKit.set("123","1");
                 String  userId = redisKit.get(header);
                 return  userId;
             }

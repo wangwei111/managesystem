@@ -70,13 +70,13 @@ public class UserFacadeImpl implements UserFacade {
         SysUser user = userMpper.chickUserName(loginUserParam.getUsername());
         UserInfoResp userInfoResp = new UserInfoResp();
         if(user !=null){
-            boolean verify = Md5Util.checkpassword(loginUserParam.getPassword(),  user.getPassword());
-            if(verify){
+            //  boolean verify = Md5Util.checkpassword(loginUserParam.getPassword(),  user.getPassword());
+            if (!StringUtils.isEmpty(user.getPassword()) && user.getPassword().equals(loginUserParam.getPassword())) {
                 //生成token
                 String token = user.getAccount() + loginUserParam.getPassword() + System.currentTimeMillis();
                 //存在redis中
-                redisKit.setIfAbsent(Md5Util.EncoderByMd5(token),user,30, TimeUnit.MINUTES);
-                userInfoResp.setToken(Md5Util.EncoderByMd5(token));
+                redisKit.set(token,user.getUserId().toString(),30000L,TimeUnit.MINUTES);
+                userInfoResp.setToken(token);
                 BeanUtils.copyProperties(user,userInfoResp);
             }else{
                 throw    new DataInvalidataException("你输入的密码错误,请从新输入！");
@@ -104,9 +104,11 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public UserInfoResp register(RegisterUserParam registerUserParam) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        Assert.isTrue(!StringUtils.isEmpty(registerUserParam.getUsername()),"用户名不能为空！");
+        //    Assert.isTrue(!StringUtils.isEmpty(registerUserParam.getUsername()),"用户名不能为空！");
         Assert.isTrue(!StringUtils.isEmpty(registerUserParam.getPassword()),"密码不能为空！");
-        SysUser user = userMpper.chickUserName(registerUserParam.getUsername());
+        userMpper.updatePasswordByUid(registerUserParam.getUid(), registerUserParam.getPassword());
+        return null;
+        /*SysUser user = userMpper.chickUserName(registerUserParam.getUsername());
         UserInfoResp userInfoResp = new UserInfoResp();
         if(user == null){
             user = new SysUser();
@@ -125,8 +127,8 @@ public class UserFacadeImpl implements UserFacade {
         }else{
             log.error("该账号已经被注册！");
             throw   new DataInvalidataException("该账号已经被注册！");
-        }
-            return userInfoResp;
+        }*/
+        // return userInfoResp;
     }
 
     @Override
@@ -163,5 +165,10 @@ public class UserFacadeImpl implements UserFacade {
            return  pageInfo;
        }
       return new PageInfo<>(null);
+    }
+
+    @Override
+    public UserInfoResp loginauthcode(String phone, String authcode) {
+        return null;
     }
 }

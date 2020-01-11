@@ -11,6 +11,9 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 import com.wwmust.manage.system.config.SnowflakeWorker;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * ${DESCRIPTION}
  *测试主键id
@@ -22,27 +25,11 @@ public class TestGenerateID {
 
     @Test
     public  void getGenerateId(){
+        List<String> s = new ArrayList<>();
 
-        Thread thread= new Thread() {
-            public void run() {
-                for(int i=0;i<100000;i++){
-                    Long aLong = SnowflakeWorker.generateId();
-                    System.out.println(aLong);
-                }
-            }
-        };
-        thread.start();
-        thread.run();
+        List<String> s1 = null;
 
-        Thread thread1= new Thread() {
-            public void run() {
-                for(int i=0;i<100000;i++){
-                    Long aLong = SnowflakeWorker.generateId();
-                    System.out.println(aLong);
-                }
-            }
-        };
-        thread1.start();
-        thread1.run();
+        System.out.println(s.size());
+        System.out.println(s1.size());
     }
 }

@@ -17,6 +17,7 @@ import com.wwmust.manage.system.starter.util.UserContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -83,8 +84,7 @@ public class UserController {
     @GetMapping("/api/user/userinfo")
     public JsonResult getUserInfo(HttpServletResponse response, HttpServletRequest request){
         try{
-            UserContext userContext = new  UserContext();
-            String userId = userContext.getUserId(request);
+            String userId = UserContext.getUserId(request);
             UserInfoResp userInfoResp = userFacade.getUserInfo(userId);
             return JsonResult.okJsonResultWithData(userInfoResp);
         }catch (Exception e){
@@ -94,6 +94,35 @@ public class UserController {
     }
 
 
+    @PostMapping("/api/user/loginauthcode")
+    public JsonResult loginauthcode(String phone, String authcode, HttpServletResponse response, HttpServletRequest request) {
+        try {
+            String userId = UserContext.getUserId(request);
+            UserInfoResp userInfoResp = userFacade.loginauthcode(phone, authcode);
+            return JsonResult.okJsonResultWithData(userInfoResp);
+        } catch (Exception e) {
+            log.error("api/system/user/register:error:{}" + e);
+            return JsonResult.failJsonResult(e.getMessage());
+        }
+    }
+
+
+    @PostMapping("/api/user/register")
+    public JsonResult setpassword(@RequestBody RegisterUserParam registerUserParam, HttpServletResponse response, HttpServletRequest request) {
+        try {
+            String userId = UserContext.getUserId(request);
+            if (StringUtils.isEmpty(userId)) {
+                return null;
+            } else {
+                registerUserParam.setUid(Long.parseLong(userId));
+            }
+            UserInfoResp userInfoResp = userFacade.register(registerUserParam);
+            return JsonResult.okJsonResultWithData(userInfoResp);
+        } catch (Exception e) {
+            log.error("api/system/user/register:error:{}" + e);
+            return JsonResult.failJsonResult(e.getMessage());
+        }
+    }
 
 
 }

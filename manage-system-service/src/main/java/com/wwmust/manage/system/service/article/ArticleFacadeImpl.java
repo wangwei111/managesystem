@@ -152,7 +152,7 @@ public class ArticleFacadeImpl implements ArticleFacade {
             ariticleDto.setCategoryId(new Long("200"));
         }
         if (ariticleDto.getCategoryId() != null && ariticleDto.getCategoryId().toString().equals("200")) {
-            ariticleDto.setIsHot("1");
+            //  ariticleDto.setIsHot("1");
             ariticleDto.setCategoryId(null);
         }
         if (ariticleDto.getCategoryId() != null && ariticleDto.getCategoryId().toString().equals("300")) {

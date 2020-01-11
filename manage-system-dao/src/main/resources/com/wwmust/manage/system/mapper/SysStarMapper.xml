@@ -104,6 +104,7 @@
         where sys_star_id = #{sysStarId,jdbcType=BIGINT}
     </update>
 
+
     <select id="getSysStarList" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
